@@ -1,0 +1,1263 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<!-- saved from url=(0032)http://xrds-simple.net/core/1.0/ -->
+<HTML lang=en><HEAD><TITLE>Implementers' Draft: XRDS-Simple 1.0 Draft 1</TITLE>
+<META http-equiv=Expires content="Wed, 26 Mar 2008 21:09:49 +0000">
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<META content="XRDS-Simple 1.0 Draft 1" name=description>
+<META content="MSHTML 6.00.6000.16609" name=GENERATOR>
+<STYLE type=text/css>BODY {
+	FONT-SIZE: small; MARGIN: 2em; COLOR: #000; FONT-FAMILY: verdana, charcoal, helvetica, arial, sans-serif; BACKGROUND-COLOR: #fff
+}
+H1 {
+	FONT-WEIGHT: bold; FONT-STYLE: normal; FONT-FAMILY: helvetica, monaco, "MS Sans Serif", arial, sans-serif
+}
+H2 {
+	FONT-WEIGHT: bold; FONT-STYLE: normal; FONT-FAMILY: helvetica, monaco, "MS Sans Serif", arial, sans-serif
+}
+H3 {
+	FONT-WEIGHT: bold; FONT-STYLE: normal; FONT-FAMILY: helvetica, monaco, "MS Sans Serif", arial, sans-serif
+}
+H4 {
+	FONT-WEIGHT: bold; FONT-STYLE: normal; FONT-FAMILY: helvetica, monaco, "MS Sans Serif", arial, sans-serif
+}
+H5 {
+	FONT-WEIGHT: bold; FONT-STYLE: normal; FONT-FAMILY: helvetica, monaco, "MS Sans Serif", arial, sans-serif
+}
+H6 {
+	FONT-WEIGHT: bold; FONT-STYLE: normal; FONT-FAMILY: helvetica, monaco, "MS Sans Serif", arial, sans-serif
+}
+H1 {
+	COLOR: #900; BACKGROUND-COLOR: transparent; TEXT-ALIGN: right
+}
+H3 {
+	COLOR: #333; BACKGROUND-COLOR: transparent
+}
+TD.RFCbug {
+	FONT-SIZE: x-small; VERTICAL-ALIGN: middle; WIDTH: 30px; PADDING-TOP: 2px; HEIGHT: 30px; BACKGROUND-COLOR: #000; TEXT-ALIGN: justify; TEXT-DECORATION: none
+}
+TD.RFCbug SPAN.RFC {
+	FONT-WEIGHT: bold; COLOR: #666; FONT-FAMILY: monaco, charcoal, geneva, "MS Sans Serif", helvetica, verdana, sans-serif
+}
+TD.RFCbug SPAN.hotText {
+	FONT-WEIGHT: normal; COLOR: #fff; FONT-FAMILY: charcoal, monaco, geneva, "MS Sans Serif", helvetica, verdana, sans-serif; TEXT-ALIGN: center
+}
+TABLE.TOCbug {
+	WIDTH: 30px; HEIGHT: 15px
+}
+TD.TOCbug {
+	WIDTH: 30px; COLOR: #fff; HEIGHT: 15px; BACKGROUND-COLOR: #900; TEXT-ALIGN: center
+}
+TD.TOCbug A {
+	FONT-WEIGHT: bold; FONT-SIZE: x-small; COLOR: #fff; FONT-FAMILY: monaco, charcoal, geneva, "MS Sans Serif", helvetica, sans-serif; BACKGROUND-COLOR: transparent; TEXT-DECORATION: none
+}
+TD.header {
+	FONT-SIZE: x-small; VERTICAL-ALIGN: top; WIDTH: 33%; COLOR: #fff; FONT-FAMILY: arial, helvetica, sans-serif; BACKGROUND-COLOR: #666
+}
+TD.author {
+	FONT-WEIGHT: bold; FONT-SIZE: x-small; MARGIN-LEFT: 4em
+}
+TD.author-text {
+	FONT-SIZE: x-small
+}
+A.info {
+	Z-INDEX: 24; POSITION: relative; TEXT-DECORATION: none
+}
+A.info:hover {
+	Z-INDEX: 25; COLOR: #fff; BACKGROUND-COLOR: #900
+}
+A.info SPAN {
+	DISPLAY: none
+}
+A.info:hover SPAN.info {
+	BORDER-RIGHT: #333 1px solid; PADDING-RIGHT: 2px; BORDER-TOP: #333 1px solid; DISPLAY: block; PADDING-LEFT: 2px; FONT-SIZE: smaller; LEFT: -5em; PADDING-BOTTOM: 2px; BORDER-LEFT: #333 1px solid; WIDTH: 15em; COLOR: #900; PADDING-TOP: 2px; BORDER-BOTTOM: #333 1px solid; POSITION: absolute; TOP: 2em; BACKGROUND-COLOR: #eee; TEXT-ALIGN: left
+}
+A {
+	FONT-WEIGHT: bold
+}
+A:link {
+	COLOR: #900; BACKGROUND-COLOR: transparent
+}
+A:visited {
+	COLOR: #633; BACKGROUND-COLOR: transparent
+}
+A:active {
+	COLOR: #633; BACKGROUND-COLOR: transparent
+}
+P {
+	MARGIN-LEFT: 2em; MARGIN-RIGHT: 2em
+}
+P.copyright {
+	FONT-SIZE: x-small
+}
+P.toc {
+	FONT-WEIGHT: bold; FONT-SIZE: small; MARGIN-LEFT: 3em
+}
+TABLE.toc {
+	BORDER-TOP-WIDTH: 0px; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px 0px 0px 3em; VERTICAL-ALIGN: text-top; PADDING-TOP: 0px; BORDER-RIGHT-WIDTH: 0px
+}
+TD.toc {
+	FONT-WEIGHT: bold; FONT-SIZE: small; VERTICAL-ALIGN: text-top
+}
+OL.text {
+	MARGIN-LEFT: 2em; MARGIN-RIGHT: 2em
+}
+UL.text {
+	MARGIN-LEFT: 2em; MARGIN-RIGHT: 2em
+}
+LI {
+	MARGIN-LEFT: 3em
+}
+EM {
+	FONT-STYLE: italic
+}
+STRONG {
+	FONT-WEIGHT: bold
+}
+DFN {
+	FONT-WEIGHT: bold; FONT-STYLE: normal
+}
+CITE {
+	FONT-WEIGHT: normal; FONT-STYLE: normal
+}
+TT {
+	COLOR: #036
+}
+TT {
+	FONT-SIZE: small; FONT-FAMILY: "Courier New", Courier, monospace
+}
+PRE {
+	FONT-SIZE: small; FONT-FAMILY: "Courier New", Courier, monospace
+}
+PRE DFN {
+	FONT-SIZE: small; FONT-FAMILY: "Courier New", Courier, monospace
+}
+PRE EM {
+	FONT-SIZE: small; FONT-FAMILY: "Courier New", Courier, monospace
+}
+PRE CITE {
+	FONT-SIZE: small; FONT-FAMILY: "Courier New", Courier, monospace
+}
+PRE SPAN {
+	FONT-SIZE: small; FONT-FAMILY: "Courier New", Courier, monospace
+}
+PRE {
+	PADDING-RIGHT: 4px; PADDING-LEFT: 4px; PADDING-BOTTOM: 4px; COLOR: #000; PADDING-TOP: 4px; BACKGROUND-COLOR: #ccc; TEXT-ALIGN: left
+}
+PRE DFN {
+	COLOR: #900
+}
+PRE EM {
+	FONT-WEIGHT: normal; COLOR: #66f; BACKGROUND-COLOR: #ffc
+}
+PRE .key {
+	FONT-WEIGHT: bold; COLOR: #33c
+}
+PRE .id {
+	COLOR: #900
+}
+PRE .str {
+	COLOR: #000; BACKGROUND-COLOR: #cff
+}
+PRE .val {
+	COLOR: #066
+}
+PRE .rep {
+	COLOR: #909
+}
+PRE .oth {
+	COLOR: #000; BACKGROUND-COLOR: #fcf
+}
+PRE .err {
+	BACKGROUND-COLOR: #fcc
+}
+TABLE.all {
+	BORDER-TOP-WIDTH: 2px; BORDER-LEFT-WIDTH: 2px; FONT-SIZE: small; BORDER-BOTTOM-WIDTH: 2px; VERTICAL-ALIGN: top; BORDER-COLLAPSE: collapse; TEXT-ALIGN: center; BORDER-RIGHT-WIDTH: 2px
+}
+TABLE.full {
+	BORDER-TOP-WIDTH: 2px; BORDER-LEFT-WIDTH: 2px; FONT-SIZE: small; BORDER-BOTTOM-WIDTH: 2px; VERTICAL-ALIGN: top; BORDER-COLLAPSE: collapse; TEXT-ALIGN: center; BORDER-RIGHT-WIDTH: 2px
+}
+TABLE.headers {
+	BORDER-TOP-WIDTH: 2px; BORDER-LEFT-WIDTH: 2px; FONT-SIZE: small; BORDER-BOTTOM-WIDTH: 2px; VERTICAL-ALIGN: top; BORDER-COLLAPSE: collapse; TEXT-ALIGN: center; BORDER-RIGHT-WIDTH: 2px
+}
+TABLE.none {
+	BORDER-TOP-WIDTH: 2px; BORDER-LEFT-WIDTH: 2px; FONT-SIZE: small; BORDER-BOTTOM-WIDTH: 2px; VERTICAL-ALIGN: top; BORDER-COLLAPSE: collapse; TEXT-ALIGN: center; BORDER-RIGHT-WIDTH: 2px
+}
+TABLE.all {
+	BORDER-LEFT-COLOR: black; BORDER-BOTTOM-COLOR: black; BORDER-TOP-STYLE: solid; BORDER-TOP-COLOR: black; BORDER-RIGHT-STYLE: solid; BORDER-LEFT-STYLE: solid; BORDER-RIGHT-COLOR: black; BORDER-BOTTOM-STYLE: solid
+}
+TABLE.full {
+	BORDER-LEFT-COLOR: black; BORDER-BOTTOM-COLOR: black; BORDER-TOP-STYLE: solid; BORDER-TOP-COLOR: black; BORDER-RIGHT-STYLE: solid; BORDER-LEFT-STYLE: solid; BORDER-RIGHT-COLOR: black; BORDER-BOTTOM-STYLE: solid
+}
+TABLE.headers {
+	BORDER-TOP-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-LEFT-STYLE: none; BORDER-BOTTOM-STYLE: none
+}
+TABLE.none {
+	BORDER-TOP-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-LEFT-STYLE: none; BORDER-BOTTOM-STYLE: none
+}
+TH {
+	BORDER-TOP-WIDTH: 2px; FONT-WEIGHT: bold; BORDER-LEFT-WIDTH: 2px; BORDER-LEFT-COLOR: black; BORDER-BOTTOM-WIDTH: 3px; BORDER-BOTTOM-COLOR: black; BORDER-TOP-COLOR: black; BORDER-RIGHT-WIDTH: 2px; BORDER-RIGHT-COLOR: black
+}
+TABLE.all TH {
+	BORDER-TOP-STYLE: solid; BORDER-RIGHT-STYLE: solid; BORDER-LEFT-STYLE: solid; BORDER-BOTTOM-STYLE: solid
+}
+TABLE.full TH {
+	BORDER-TOP-STYLE: solid; BORDER-RIGHT-STYLE: solid; BORDER-LEFT-STYLE: solid; BORDER-BOTTOM-STYLE: solid
+}
+TABLE.headers TH {
+	BORDER-TOP-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-LEFT-STYLE: none; BORDER-BOTTOM-STYLE: solid
+}
+TABLE.none TH {
+	BORDER-TOP-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-LEFT-STYLE: none; BORDER-BOTTOM-STYLE: none
+}
+TABLE.all TD {
+	BORDER-RIGHT: #333 2px solid; BORDER-TOP: #333 1px solid; BORDER-LEFT: #333 2px solid; BORDER-BOTTOM: #333 1px solid
+}
+TABLE.full TD {
+	BORDER-TOP-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-LEFT-STYLE: none; BORDER-BOTTOM-STYLE: none
+}
+TABLE.headers TD {
+	BORDER-TOP-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-LEFT-STYLE: none; BORDER-BOTTOM-STYLE: none
+}
+TABLE.none TD {
+	BORDER-TOP-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-LEFT-STYLE: none; BORDER-BOTTOM-STYLE: none
+}
+HR {
+	HEIGHT: 1px
+}
+HR.insert {
+	BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; WIDTH: 80%; COLOR: #ccc; BORDER-BOTTOM: 0px; BACKGROUND-COLOR: #ccc
+}
+</STYLE>
+</HEAD>
+<BODY>
+<TABLE class=TOCbug cellSpacing=2 cellPadding=0 align=right summary=layout>
+  <TBODY>
+  <TR>
+    <TD class=TOCbug><A 
+      href="http://xrds-simple.net/core/1.0/#toc">&nbsp;TOC&nbsp;</A></TD></TR></TBODY></TABLE>
+<TABLE cellSpacing=0 cellPadding=0 width="66%" summary=layout border=0>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=1 cellPadding=2 width="100%" summary=layout border=0>
+        <TBODY>
+        <TR>
+          <TD class=header>Implementers' Draft</TD>
+          <TD class=header>E. Hammer-Lahav (Editor)</TD></TR>
+        <TR>
+          <TD class=header>&nbsp;</TD>
+          <TD class=header>Hueniverse, LLC</TD></TR>
+        <TR>
+          <TD class=header>&nbsp;</TD>
+          <TD class=header>March 26, 
+2008</TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>
+<H1><BR>XRDS-Simple 1.0 Draft 1</H1>
+<H3>Abstract</H3>
+<P>XRDS-Simple provides a format and workflow for the discovery of resources 
+metadata, and other linked resources. As web services continue to grow, 
+applications utilize a wider range of web services and resources across multiple 
+providers. XRDS-Simple allows providers to document their resources in a 
+machine-readable way, which can be automatically discovered by consumer 
+applications. </P>
+<P>The XRDS-Simple specification builds on top of existing practices first 
+introduced by the XRI community and later adopted and further developed by 
+Yadis, a discovery protocol widely used by the OpenID community. XRDS-Simple 
+goal is to provide an easy to implement solution that is focused on solving the 
+most common discovery use cases. </P><A name=toc></A><BR>
+<HR>
+
+<H3>Table of Contents</H3>
+<P class=toc><A href="http://xrds-simple.net/core/1.0/#anchor1">1.</A>&nbsp; 
+Notation and Conventions<BR><A 
+href="http://xrds-simple.net/core/1.0/#anchor2">2.</A>&nbsp; Definitions<BR><A 
+href="http://xrds-simple.net/core/1.0/#anchor3">3.</A>&nbsp; Introduction<BR><A 
+href="http://xrds-simple.net/core/1.0/#anchor4">4.</A>&nbsp; Workflow 
+Overview<BR><A href="http://xrds-simple.net/core/1.0/#anchor5">5.</A>&nbsp; 
+Document Retrieval<BR>&nbsp;&nbsp;&nbsp;&nbsp;<A 
+href="http://xrds-simple.net/core/1.0/#anchor6">5.1.</A>&nbsp; Obtaining 
+Location<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A 
+href="http://xrds-simple.net/core/1.0/#anchor7">5.1.1.</A>&nbsp; HEAD 
+Protocol<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A 
+href="http://xrds-simple.net/core/1.0/#get_yadis">5.1.2.</A>&nbsp; GET 
+Protocol<BR>&nbsp;&nbsp;&nbsp;&nbsp;<A 
+href="http://xrds-simple.net/core/1.0/#go_fetch">5.2.</A>&nbsp; Requesting 
+Document<BR><A 
+href="http://xrds-simple.net/core/1.0/#xrds_simple_format">6.</A>&nbsp; Document 
+Structure<BR>&nbsp;&nbsp;&nbsp;&nbsp;<A 
+href="http://xrds-simple.net/core/1.0/#requirements">6.1.</A>&nbsp; Declarations 
+and Requirements<BR>&nbsp;&nbsp;&nbsp;&nbsp;<A 
+href="http://xrds-simple.net/core/1.0/#xrd_element">6.2.</A>&nbsp; XRD 
+Element<BR>&nbsp;&nbsp;&nbsp;&nbsp;<A 
+href="http://xrds-simple.net/core/1.0/#service_element">6.3.</A>&nbsp; Service 
+Element<BR>&nbsp;&nbsp;&nbsp;&nbsp;<A 
+href="http://xrds-simple.net/core/1.0/#priority_attribute">6.4.</A>&nbsp; 
+priority Attribute<BR>&nbsp;&nbsp;&nbsp;&nbsp;<A 
+href="http://xrds-simple.net/core/1.0/#anchor8">6.5.</A>&nbsp; Non-XRDS Elements 
+and Attributes<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A 
+href="http://xrds-simple.net/core/1.0/#httpMethod_attribute">6.5.1.</A>&nbsp; 
+simple:httpMethod 
+Attribute<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A 
+href="http://xrds-simple.net/core/1.0/#MustSupport_element">6.5.2.</A>&nbsp; 
+simple:MustSupport Element<BR>&nbsp;&nbsp;&nbsp;&nbsp;<A 
+href="http://xrds-simple.net/core/1.0/#anchor9">6.6.</A>&nbsp; Extension and 
+Deviation<BR><A href="http://xrds-simple.net/core/1.0/#anchor10">7.</A>&nbsp; 
+Resource Descriptions Selection<BR>&nbsp;&nbsp;&nbsp;&nbsp;<A 
+href="http://xrds-simple.net/core/1.0/#xrd_identification">7.1.</A>&nbsp; XRD 
+Identification<BR>&nbsp;&nbsp;&nbsp;&nbsp;<A 
+href="http://xrds-simple.net/core/1.0/#service_selection">7.2.</A>&nbsp; Service 
+Selection<BR><A 
+href="http://xrds-simple.net/core/1.0/#anchor11">Appendix&nbsp;A.</A>&nbsp; 
+Example<BR><A 
+href="http://xrds-simple.net/core/1.0/#anchor12">Appendix&nbsp;B.</A>&nbsp; 
+History of XRDS<BR><A 
+href="http://xrds-simple.net/core/1.0/#anchor13">Appendix&nbsp;C.</A>&nbsp; 
+Security Considerations<BR><A 
+href="http://xrds-simple.net/core/1.0/#anchor14">Appendix&nbsp;D.</A>&nbsp; 
+Acknowledgments<BR><A 
+href="http://xrds-simple.net/core/1.0/#rfc.references1">8.</A>&nbsp; 
+References<BR><A href="http://xrds-simple.net/core/1.0/#rfc.authors">§</A>&nbsp; 
+Author's Address<BR></P><BR clear=all><A name=anchor1></A><BR>
+<HR>
+
+<TABLE class=TOCbug cellSpacing=2 cellPadding=0 align=right summary=layout>
+  <TBODY>
+  <TR>
+    <TD class=TOCbug><A 
+      href="http://xrds-simple.net/core/1.0/#toc">&nbsp;TOC&nbsp;</A></TD></TR></TBODY></TABLE><A 
+name=rfc.section.1></A>
+<H3>1.&nbsp; Notation and Conventions</H3>
+<P>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", 
+"SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be 
+interpreted as described in <A class=info 
+href="http://xrds-simple.net/core/1.0/#RFC2119">[RFC2119]<SPAN> (</SPAN><SPAN 
+class=info>Bradner, B., “Key words for use in RFCs to Indicate Requirement 
+Levels,” .</SPAN><SPAN>)</SPAN></A>. Domain name examples use <A class=info 
+href="http://xrds-simple.net/core/1.0/#RFC2606">[RFC2606]<SPAN> (</SPAN><SPAN 
+class=info>Eastlake, D. and A. Panitz, “Reserved Top Level DNS Names,” 
+.</SPAN><SPAN>)</SPAN></A>. </P><A name=anchor2></A><BR>
+<HR>
+
+<TABLE class=TOCbug cellSpacing=2 cellPadding=0 align=right summary=layout>
+  <TBODY>
+  <TR>
+    <TD class=TOCbug><A 
+      href="http://xrds-simple.net/core/1.0/#toc">&nbsp;TOC&nbsp;</A></TD></TR></TBODY></TABLE><A 
+name=rfc.section.2></A>
+<H3>2.&nbsp; Definitions</H3>
+<P></P>
+<BLOCKQUOTE class=text>
+  <DL>
+    <DT>Resource: 
+    <DD>A URI-addressable network document or service. 
+    <DT>Endpoint: 
+    <DD>An absolute URI at which a Resource is available on the network. 
+    <DT>Resource Description Document 
+    <DD>An XML-formatted document providing a machine-readable list of Resources 
+    descriptions and their Endpoints. 
+    <DT>Service Provider: 
+    <DD>A web application offering XRDS-Simple discovery information about its 
+    Resources and related Resources offered by other providers. 
+    <DT>Consumer: 
+    <DD>A website or application that uses XRDS-Simple to discovery information 
+    about Resources offered by a Service Provider. </DD></DL></BLOCKQUOTE>
+<P></P><A name=anchor3></A><BR>
+<HR>
+
+<TABLE class=TOCbug cellSpacing=2 cellPadding=0 align=right summary=layout>
+  <TBODY>
+  <TR>
+    <TD class=TOCbug><A 
+      href="http://xrds-simple.net/core/1.0/#toc">&nbsp;TOC&nbsp;</A></TD></TR></TBODY></TABLE><A 
+name=rfc.section.3></A>
+<H3>3.&nbsp; Introduction</H3>
+<P>XRDS-Simple defines a subset of the XRDS format defined in <A class=info 
+href="http://xrds-simple.net/core/1.0/#XRI%20Resolution%202.0">[XRI Resolution 
+2.0]<SPAN> (</SPAN><SPAN class=info>Wachob, G., Reed, D., Chasen, L., Tan, W., 
+and S. Churchill, “Extensible Resource Identifier (XRI) Resolution V2.0,” 
+.</SPAN><SPAN>)</SPAN></A>, with a small set of extensions. In this 
+specification, XRDS refers to the full format defined in <A class=info 
+href="http://xrds-simple.net/core/1.0/#XRI%20Resolution%202.0">[XRI Resolution 
+2.0]<SPAN> (</SPAN><SPAN class=info>Wachob, G., Reed, D., Chasen, L., Tan, W., 
+and S. Churchill, “Extensible Resource Identifier (XRI) Resolution V2.0,” 
+.</SPAN><SPAN>)</SPAN></A>, while XRDS-Simple refers to the subset of XRDS and 
+the extensions defined in <A class=info 
+href="http://xrds-simple.net/core/1.0/#xrds_simple_format">Section&nbsp;6<SPAN> 
+(</SPAN><SPAN class=info>Document Structure</SPAN><SPAN>)</SPAN></A>. </P>
+<P>The goal of XRDS-Simple is to provide a lightweight version of XRDS that 
+simplifies the implementation of parsers while maintaining full compatibility 
+with XRDS and any XRDS-compliant parsers and resolvers. It also serves as an 
+introduction to XRDS, giving implementers an upgrade path to other XRDS features 
+when appropriate. </P>
+<P>By defining XRDS-Simple, implementers can both declare the scope of their 
+application and capabilities, as well as perform tests to assert that their 
+application is capable of processing input documents exactly as they were 
+intended. This is of particular importance when processing documents with 
+security or identity information, where misinterpretation of the document can 
+lead to a breach of security. </P><A name=anchor4></A><BR>
+<HR>
+
+<TABLE class=TOCbug cellSpacing=2 cellPadding=0 align=right summary=layout>
+  <TBODY>
+  <TR>
+    <TD class=TOCbug><A 
+      href="http://xrds-simple.net/core/1.0/#toc">&nbsp;TOC&nbsp;</A></TD></TR></TBODY></TABLE><A 
+name=rfc.section.4></A>
+<H3>4.&nbsp; Workflow Overview</H3>
+<P>XRDS-Simple provides a bi-directional method for mapping between a Resource 
+and the Resource Description Document describing it. This allows finding 
+Resource information from either starting point, a Resource or a Resource 
+Description Document. </P>
+<P>In one direction, the Resource Endpoint is used to retrieve the Resource 
+Description Document - a machine-readable document containing information about 
+the Resource, as well as links to other associated Resources. In the opposite 
+direction, a Resource Description Document provides a list of Resource 
+descriptions which are matched against the desired selection criteria leading to 
+a Resource Endpoint. </P>
+<P>This can also be viewed as a circular workflow in which a Resource Endpoint 
+leads to the Resource Description Document which in turns leads back to the 
+Resource Endpoint via the Resource description, as well as points to other 
+Resource Endpoints. The entry point in which a Consumer enters the workflow 
+depends on what is available to it. </P>
+<P>The discovery workflow centers on the retrieval and parsing of the Resource 
+Description Document and includes two steps, each representing one of the entry 
+point to the workflow: </P>
+<UL class=text>
+  <LI>Retrieve the Resource Description Document. 
+  <LI>Parse the Resource Description Document and select the desired Endpoints. 
+  </LI></UL>
+<P></P><A name=anchor5></A><BR>
+<HR>
+
+<TABLE class=TOCbug cellSpacing=2 cellPadding=0 align=right summary=layout>
+  <TBODY>
+  <TR>
+    <TD class=TOCbug><A 
+      href="http://xrds-simple.net/core/1.0/#toc">&nbsp;TOC&nbsp;</A></TD></TR></TBODY></TABLE><A 
+name=rfc.section.5></A>
+<H3>5.&nbsp; Document Retrieval</H3>
+<P>The Consumer obtains the Resource Description Document by following the 
+workflow defined in this section, starting with the Resource Endpoint. 
+XRDS-Simple only defines a retrieval method for HTTP(S) Endpoints. While 
+XRDS-Simple supports descriptions of non-HTTP(S) Endpoints, the method in which 
+their associated Resource Description Document is retrieved is beyond the scope 
+of this specification. </P>
+<P>Document retrieval is performed in two steps. First the document's location 
+is obtained from the Endpoint, then the location obtained is used to request the 
+Resource Description Document. </P><A name=anchor6></A><BR>
+<HR>
+
+<TABLE class=TOCbug cellSpacing=2 cellPadding=0 align=right summary=layout>
+  <TBODY>
+  <TR>
+    <TD class=TOCbug><A 
+      href="http://xrds-simple.net/core/1.0/#toc">&nbsp;TOC&nbsp;</A></TD></TR></TBODY></TABLE><A 
+name=rfc.section.5.1></A>
+<H3>5.1.&nbsp; Obtaining Location</H3>
+<P>The document's location can be obtained using two protocols, originally 
+specified in <A class=info 
+href="http://xrds-simple.net/core/1.0/#Yadis">[Yadis]<SPAN> (</SPAN><SPAN 
+class=info>Miller, J., “Yadis Specification 1.0,” .</SPAN><SPAN>)</SPAN></A> and 
+later adapted in <A class=info 
+href="http://xrds-simple.net/core/1.0/#XRI%20Resolution%202.0">[XRI Resolution 
+2.0]<SPAN> (</SPAN><SPAN class=info>Wachob, G., Reed, D., Chasen, L., Tan, W., 
+and S. Churchill, “Extensible Resource Identifier (XRI) Resolution V2.0,” 
+.</SPAN><SPAN>)</SPAN></A>, one uses HTTP HEAD while the other uses HTTP GET. 
+</P>
+<P>In both protocols, if the Endpoint contains a fragment, it MUST be removed 
+prior to querying for the document's location. This is important as the 
+document's location HTTP(S) URI MAY contain a fragment which carried a special 
+meaning, and MUST NOT be confused with the Endpoint fragment (which is discarded 
+for the purpose of performing discovery). </P>
+<P>Service Providers MUST support the GET protocol and MAY support the HEAD 
+protocol. Consumers MAY attempt the HEAD protocol but MUST attempt the GET 
+protocol if the HEAD protocol fails. There is no difference between the 
+retrieval workflow of XRDS documents and that of XRDS-Simple documents. </P>
+<P>In all cases the HTTP(S) status messages and error codes defined in <A 
+class=info href="http://xrds-simple.net/core/1.0/#RFC2616">[RFC2616]<SPAN> 
+(</SPAN><SPAN class=info>Fielding, R., Gettys, J., Mogul, J., Frystyk, H., 
+Masinter, L., Leach, P., and T. Berners-Lee, “Hypertext Transfer Protocol -- 
+HTTP/1.1,” .</SPAN><SPAN>)</SPAN></A> SHALL apply. Consumers MUST be able to 
+handle HTTP redirects when requesting the document's location and the Resource 
+Description Document. </P>
+<P>If the Service Provider supports HTTP content negotiation, its responses 
+SHOULD include a <TT>Vary</TT> header to allow caches to properly interpret 
+future requests. This header SHOULD be present even in the case where an HTML 
+page is returned (instead of an XRDS document). </P><A name=anchor7></A><BR>
+<HR>
+
+<TABLE class=TOCbug cellSpacing=2 cellPadding=0 align=right summary=layout>
+  <TBODY>
+  <TR>
+    <TD class=TOCbug><A 
+      href="http://xrds-simple.net/core/1.0/#toc">&nbsp;TOC&nbsp;</A></TD></TR></TBODY></TABLE><A 
+name=rfc.section.5.1.1></A>
+<H3>5.1.1.&nbsp; HEAD Protocol</H3>
+<P>Using the HEAD protocol, the Consumer MUST issue an HTTP(S) <TT>HEAD</TT> 
+request to the Endpoint. The request SHOULD include an <TT>Accept</TT> header 
+specifying content type <TT>application/xrds+xml</TT>. The response from the 
+Service Provider MUST include only headers, which MUST contain one of the 
+following: </P>
+<OL class=text>
+  <LI>An <TT>X-XRDS-Location</TT> header where the value of the header MUST be 
+  an HTTP(S) URI which gives the document's location. 
+  <LI>A <TT>Content-Type</TT> header specifying the content type 
+  <TT>application/xrds+xml</TT>. In this case the document's location is 
+  identical to the Endpoint, excluding any fragment. </LI></OL>
+<P></P>
+<P>If both headers are present, the <TT>X-XRDS-Location</TT> header is used and 
+the <TT>Content-Type</TT> header ignored. If neither header is present, the 
+protocol fails and the Consumer MUST attempt the <A class=info 
+href="http://xrds-simple.net/core/1.0/#get_yadis">GET protocol<SPAN> 
+(</SPAN><SPAN class=info>GET Protocol</SPAN><SPAN>)</SPAN></A>. </P><A 
+name=get_yadis></A><BR>
+<HR>
+
+<TABLE class=TOCbug cellSpacing=2 cellPadding=0 align=right summary=layout>
+  <TBODY>
+  <TR>
+    <TD class=TOCbug><A 
+      href="http://xrds-simple.net/core/1.0/#toc">&nbsp;TOC&nbsp;</A></TD></TR></TBODY></TABLE><A 
+name=rfc.section.5.1.2></A>
+<H3>5.1.2.&nbsp; GET Protocol</H3>
+<P>Using the GET protocol, the Consumer MUST issue an HTTP(S) <TT>GET</TT> 
+request to the Endpoint. The request SHOULD include an <TT>Accept</TT> header 
+specifying content type <TT>application/xrds+xml</TT>. The Service Provider 
+response MUST be one of three options: </P>
+<OL class=text>
+  <LI>A Valid XRDS document in the response body. The Response SHOULD include 
+  the <TT>Content-Type</TT> header with value <TT>application/xrds+xml</TT>. In 
+  this case, the response body contains the Resource Description Document and 
+  the workflow ends successfully skipping the step described in <A class=info 
+  href="http://xrds-simple.net/core/1.0/#go_fetch">Section&nbsp;5.2<SPAN> 
+  (</SPAN><SPAN class=info>Requesting Document</SPAN><SPAN>)</SPAN></A>. 
+  <LI>An <TT>X-XRDS-Location</TT> header where the value of the header MUST be 
+  an HTTP(S) URI which gives the document's location. 
+  <LI>A valid HTML document in the response body, with a &lt;head&gt; element 
+  that includes a &lt;meta&gt; element with an <TT>http-equiv</TT> attribute 
+  equals to <TT>X-XRDS-Location</TT>. The value of the &lt;meta&gt; element 
+  <TT>content</TT> attribute MUST be an HTTP(S) URI which gives the document's 
+  location. </LI></OL>
+<P></P>
+<P>The Consumer MUST check the Service Provider's response for one of the three 
+options in the order they are listed above, and MUST stop as soon as a match is 
+found. If no match is found, the protocol fails and the discovery workflow ends 
+unsuccessfully. </P><A name=go_fetch></A><BR>
+<HR>
+
+<TABLE class=TOCbug cellSpacing=2 cellPadding=0 align=right summary=layout>
+  <TBODY>
+  <TR>
+    <TD class=TOCbug><A 
+      href="http://xrds-simple.net/core/1.0/#toc">&nbsp;TOC&nbsp;</A></TD></TR></TBODY></TABLE><A 
+name=rfc.section.5.2></A>
+<H3>5.2.&nbsp; Requesting Document</H3>
+<P>Once the document's location has been obtains, the Consumer MUST check if it 
+is identical to the Endpoint to avoid a loop (ignoring any differences in the 
+URI fragments), in which case the discovery workflow ends unsuccessfully. 
+Otherwise, the Consumer MUST request the XRDS document from the location URI 
+using an HTTP(S) <TT>GET</TT>. This request SHOULD an <TT>Accept</TT> header 
+specifying content type <TT>application/xrds+xml</TT>. </P>
+<P>The Service Provider MUST reply with a Valid XRDS document in the response 
+body. The Response SHOULD include the <TT>Content-Type</TT> header with value 
+<TT>application/xrds+xml</TT>. If the response is not a valid XRDS document, the 
+discovery workflow ends unsuccessfully. </P>
+<P>If the document's location URI contains a fragment, it is used as an XRD 
+identifier pointing to a specific element with an <TT>xml:id</TT> attribute of 
+identical value. The XRD identifier is described in <A class=info 
+href="http://xrds-simple.net/core/1.0/#xrd_identification">Section&nbsp;7.1<SPAN> 
+(</SPAN><SPAN class=info>XRD Identification</SPAN><SPAN>)</SPAN></A>. </P><A 
+name=xrds_simple_format></A><BR>
+<HR>
+
+<TABLE class=TOCbug cellSpacing=2 cellPadding=0 align=right summary=layout>
+  <TBODY>
+  <TR>
+    <TD class=TOCbug><A 
+      href="http://xrds-simple.net/core/1.0/#toc">&nbsp;TOC&nbsp;</A></TD></TR></TBODY></TABLE><A 
+name=rfc.section.6></A>
+<H3>6.&nbsp; Document Structure</H3>
+<P>The Resource Description Document is an XML-formatted document providing 
+machine-readable descriptions of one or more Resources. Grouping descriptions 
+together is usually done to indicate some common purpose, for example, a 
+collection of services offered by a company or an individual's online assets and 
+identifiers. XRDS-Simple defines only the most fundamental properties needed for 
+requesting specific representations of the Resource (e.g., specific media 
+types), or for interacting directly with the Resource. </P>
+<P>In its simplest form, the Resource Description Document is a list of 
+Resources and their Endpoints grouped together. The document structure consists 
+of three primary elements (listed in reverse hierarchical order): </P>
+<BLOCKQUOTE class=text>
+  <DL>
+    <DT>&lt;Service&gt; 
+    <DD>Describes a Resource by assigning it a type and media-type, declaring 
+    its Endpoints, and provides any additional information relevant to the 
+    utilization of the Resource. For example, it describes a photo album, 
+    identity provider, or social network account. 
+    <DT>&lt;XRD&gt; 
+    <DD>Container element used to group together any number of <TT>Service</TT> 
+    elements, usually with some commonality. For example, a group of identity 
+    Resources or a list of sites holding someone's photos. 
+    <DT>&lt;XRDS&gt; 
+    <DD>Container element used to group together any number of <TT>XRD</TT> 
+    elements with elements from other namespaces, usually with some common 
+    context. For example, documenting multiple groups of an individual's social 
+    networking accounts, grouped together based on persona (work, home, etc.). 
+    </DD></DL></BLOCKQUOTE>
+<P></P><A name=requirements></A><BR>
+<HR>
+
+<TABLE class=TOCbug cellSpacing=2 cellPadding=0 align=right summary=layout>
+  <TBODY>
+  <TR>
+    <TD class=TOCbug><A 
+      href="http://xrds-simple.net/core/1.0/#toc">&nbsp;TOC&nbsp;</A></TD></TR></TBODY></TABLE><A 
+name=rfc.section.6.1></A>
+<H3>6.1.&nbsp; Declarations and Requirements</H3>
+<P>The Resource Description Document MUST be a valid XRDS document, contain a 
+single <TT>XRDS</TT> root element, and define the <TT>xri://$xrds</TT> 
+namespace. While a valid XRDS-Simple document MAY include any number of 
+<TT>XRD</TT> elements as well as elements from other namespaces, only 
+XRDS-Simple compliant <TT>XRD</TT> elements are used in the discovery process. 
+</P>
+<P>XRDS-Simple compliant <TT>XRD</TT> elements MUST define the 
+<TT>xri://$XRD*($v*2.0)</TT> namespace as well as include the <TT>version</TT> 
+attribute with value <TT>2.0</TT>. They MUST include a <TT>Type</TT> child with 
+value <TT>xri://$xrds*simple</TT>. For the remainder of this specification, 
+<TT>XRD</TT> elements refer only to XRDS-Simple compliant <TT>XRD</TT> elements. 
+For example: </P>
+<DIV style="MARGIN-LEFT: 3em; WIDTH: 0pt; MARGIN-RIGHT: auto"><PRE>      &lt;XRDS xmlns="xri://$xrds"&gt;
+        &lt;XRD xmlns="xri://$XRD*($v*2.0)" version="2.0"&gt;
+          &lt;Type&gt;xri://$xrds*simple&lt;/Type&gt;
+        &lt;/XRD&gt;
+      &lt;/XRDS&gt;
+</PRE></DIV>
+<P></P>
+<P>If an XRDS-Simple document contains more than one XRDS-Simple compliant 
+<TT>XRD</TT> element, they SHOULD all be assigned unique identifiers using the 
+<TT>xml:id</TT> attribute. XRDS-Simple only provides a limited selection method 
+of choosing between <TT>XRD</TT> elements, in which case, if a document contains 
+more than one <TT>XRD</TT> element, the unique XRD identifier is used to point 
+to a specific element as described in <A class=info 
+href="http://xrds-simple.net/core/1.0/#xrd_identification">Section&nbsp;7.1<SPAN> 
+(</SPAN><SPAN class=info>XRD Identification</SPAN><SPAN>)</SPAN></A>. </P>
+<P>The Consumer MAY ignore any other child element of the root <TT>XRDS</TT> 
+element, including non-compliant <TT>XRD</TT> elements or elements from other 
+namespaces. The presence of such element MUST NOT alter the way in which the 
+document is processed as defined in this specification. </P><A 
+name=xrd_element></A><BR>
+<HR>
+
+<TABLE class=TOCbug cellSpacing=2 cellPadding=0 align=right summary=layout>
+  <TBODY>
+  <TR>
+    <TD class=TOCbug><A 
+      href="http://xrds-simple.net/core/1.0/#toc">&nbsp;TOC&nbsp;</A></TD></TR></TBODY></TABLE><A 
+name=rfc.section.6.2></A>
+<H3>6.2.&nbsp; XRD Element</H3>
+<P>The <TT>XRD</TT> element is a container used to group together any number of 
+Resources. The <TT>XRD</TT> element supports the following attributes: </P>
+<BLOCKQUOTE class=text>
+  <DL>
+    <DT>xml:id 
+    <DD>OPTIONAL with type xs:ID, used to uniquely identify this element within 
+    the containing <TT>XRDS</TT> root element. The attribute is RECOMMENDED if 
+    the document contains more than one <TT>XRD</TT> element and its usage is 
+    defined in <A class=info 
+    href="http://xrds-simple.net/core/1.0/#xrd_identification">Section&nbsp;7.1<SPAN> 
+    (</SPAN><SPAN class=info>XRD Identification</SPAN><SPAN>)</SPAN></A>. Note 
+    that this attribute is an implicit XML attribute defined in <A class=info 
+    href="http://xrds-simple.net/core/1.0/#xml:id">[xml:id]<SPAN> (</SPAN><SPAN 
+    class=info>Marsh, J., Veillard, D., and N. Walsh, “xml:id Version 1.0, World 
+    Wide Web Consortium,” .</SPAN><SPAN>)</SPAN></A>. 
+    <DT>version 
+    <DD>REQUIRED with type xs:string and a value of <TT>2.0</TT>. 
+</DD></DL></BLOCKQUOTE>
+<P></P>
+<P>The <TT>XRD</TT> element supports the following child elements: </P>
+<BLOCKQUOTE class=text>
+  <DL>
+    <DT>&lt;Type&gt; 
+    <DD>1 or more per <TT>XRD</TT> element with type xs:anyURI. The 
+    <TT>Type</TT> element describes the nature of the <TT>XRD</TT> element, how 
+    it should be processed, and the context in which it is used. Each 
+    <TT>XRD</TT> element MUST include one and only one <TT>Type</TT> element 
+    with the value <TT>xri://$xrds*simple</TT>, and MAY include any number of 
+    other <TT>Type</TT> elements. The element MAY also be used to describe the 
+    group of Resources included within. 
+    <DT>&lt;Expires&gt; 
+    <DD>0 or 1 per <TT>XRD</TT> element with type xs:dateTime. The date and time 
+    without fractional seconds in UTC "Z" time zone, after which the 
+    <TT>XRD</TT> element MUST NOT be used. If the Resource Description Document 
+    was obtained via HTTP, and the HTTP headers specified an expiry time per 
+    section 13.2 of <A class=info 
+    href="http://xrds-simple.net/core/1.0/#RFC2616">[RFC2616]<SPAN> 
+    (</SPAN><SPAN class=info>Fielding, R., Gettys, J., Mogul, J., Frystyk, H., 
+    Masinter, L., Leach, P., and T. Berners-Lee, “Hypertext Transfer Protocol -- 
+    HTTP/1.1,” .</SPAN><SPAN>)</SPAN></A>, the <TT>XRD</TT> element MUST NOT be 
+    used after the earlier of the two times passes. 
+    <DT>&lt;Service&gt; 
+    <DD>0 or more per <TT>XRD</TT> element as defined in <A class=info 
+    href="http://xrds-simple.net/core/1.0/#service_element">Section&nbsp;6.3<SPAN> 
+    (</SPAN><SPAN class=info>Service Element</SPAN><SPAN>)</SPAN></A>. 
+</DD></DL></BLOCKQUOTE>
+<P></P><A name=service_element></A><BR>
+<HR>
+
+<TABLE class=TOCbug cellSpacing=2 cellPadding=0 align=right summary=layout>
+  <TBODY>
+  <TR>
+    <TD class=TOCbug><A 
+      href="http://xrds-simple.net/core/1.0/#toc">&nbsp;TOC&nbsp;</A></TD></TR></TBODY></TABLE><A 
+name=rfc.section.6.3></A>
+<H3>6.3.&nbsp; Service Element</H3>
+<P>The <TT>Service</TT> element describes a Resource and provides elements to 
+declare its Endpoints and other attributes. The <TT>Service</TT> element 
+supports the following attributes: </P>
+<BLOCKQUOTE class=text>
+  <DL>
+    <DT>priority 
+    <DD>OPTIONAL with type xs:nonNegativeInteger as defined by <A class=info 
+    href="http://xrds-simple.net/core/1.0/#priority_attribute">Section&nbsp;6.4<SPAN> 
+    (</SPAN><SPAN class=info>priority Attribute</SPAN><SPAN>)</SPAN></A>. Used 
+    to set the order of preference between Resources that would otherwise be 
+    considered of equal purpose. RECOMMENDED when an <TT>XRD</TT> element 
+    contains multiple <TT>Service</TT> elements with identical types or 
+    media-types association. </DD></DL></BLOCKQUOTE>
+<P></P>
+<P>The <TT>Service</TT> element supports the following child elements: </P>
+<BLOCKQUOTE class=text>
+  <DL>
+    <DT>&lt;Type&gt; 
+    <DD>0 or more per <TT>Service</TT> element with type xs:anyURI. The 
+    <TT>Type</TT> element describes the nature of the Resource, how it should be 
+    accessed, and the context in which it is selected. The value of the 
+    <TT>Type</TT> element MUST be an absolute URI. Each <TT>Service</TT> element 
+    MUST include at least one of either <TT>Type</TT> element or 
+    <TT>MediaType</TT> element, but MAY include any number of both. 
+    <DT>&lt;MediaType&gt; 
+    <DD>0 or more per <TT>Service</TT> element with type xs:string. Describes 
+    the media-type of the content available at this Resource. The value MUST be 
+    a valid media-type as defined in <A class=info 
+    href="http://xrds-simple.net/core/1.0/#RFC2046">[RFC2046]<SPAN> 
+    (</SPAN><SPAN class=info>Freed, N. and N. Borenstein, “Multipurpose Internet 
+    Mail Extensions (MIME) Part Two: Media Types,” .</SPAN><SPAN>)</SPAN></A>. 
+    Each <TT>Service</TT> element MUST include at least one of either 
+    <TT>Type</TT> element or <TT>MediaType</TT> element, but MAY include any 
+    number of both. 
+    <DT>&lt;URI&gt; 
+    <DD>0 or more per <TT>Service</TT> element with type xs:anyURI. Provides the 
+    Endpoint where the Resource can be found and used or retrieved. If no 
+    <TT>URI</TT> element is defined, it is assumed the URI can be obtained by 
+    other means not specified in this specification. Supports the OPTIONAL 
+    <TT>priority</TT> attribute as defined by <A class=info 
+    href="http://xrds-simple.net/core/1.0/#priority_attribute">Section&nbsp;6.4<SPAN> 
+    (</SPAN><SPAN class=info>priority Attribute</SPAN><SPAN>)</SPAN></A>, and 
+    the OPTIONAL extension attribute <TT>simple:httpMethod</TT> as defined by <A 
+    class=info 
+    href="http://xrds-simple.net/core/1.0/#httpMethod_attribute">Section&nbsp;6.5.1<SPAN> 
+    (</SPAN><SPAN class=info>simple:httpMethod 
+    Attribute</SPAN><SPAN>)</SPAN></A> 
+    <DT>&lt;LocalID&gt; 
+    <DD>0 or more per <TT>Service</TT> element with type xs:anyURI. Provides a 
+    standard way to indicate the identifier associated with the Resource at the 
+    Endpoint where it is located. The value and meaning of the element is 
+    specific to the Resource and its type, and is beyond the scope of this 
+    specification. Supports the OPTIONAL <TT>priority</TT> attribute as defined 
+    by <A class=info 
+    href="http://xrds-simple.net/core/1.0/#priority_attribute">Section&nbsp;6.4<SPAN> 
+    (</SPAN><SPAN class=info>priority Attribute</SPAN><SPAN>)</SPAN></A>. For 
+    example, this element is useful when the local identifier such as username, 
+    is not part of the Endpoint, but is provided as a parameter. 
+    <DT>&lt;simple:MustSupport&gt; 
+    <DD>0 or more per <TT>Service</TT> element with type xs:anyURI as defined by 
+    <A class=info 
+    href="http://xrds-simple.net/core/1.0/#MustSupport_element">Section&nbsp;6.5.2<SPAN> 
+    (</SPAN><SPAN class=info>simple:MustSupport 
+    Element</SPAN><SPAN>)</SPAN></A>. Defines requirements the Consumer MUST 
+    meet in order to utilize the Resource described. </DD></DL></BLOCKQUOTE>
+<P></P>
+<P>When selecting between multiple <TT>Service</TT> elements, the types and 
+media-types of each Resource are used together with the relative priorities, to 
+find the most appropriate Resource. </P><A name=priority_attribute></A><BR>
+<HR>
+
+<TABLE class=TOCbug cellSpacing=2 cellPadding=0 align=right summary=layout>
+  <TBODY>
+  <TR>
+    <TD class=TOCbug><A 
+      href="http://xrds-simple.net/core/1.0/#toc">&nbsp;TOC&nbsp;</A></TD></TR></TBODY></TABLE><A 
+name=rfc.section.6.4></A>
+<H3>6.4.&nbsp; priority Attribute</H3>
+<P>XRDS-Simple allows the <TT>Service</TT>, <TT>URI</TT>, and <TT>LocalID</TT> 
+elements to appear multiple times within the same parent element to provide 
+redundancy, flexibility, or other purposes. When these elements appear more than 
+once within the same parent, Service Providers SHOULD use the <TT>priority</TT> 
+attribute to prioritize selection of these element instances. </P>
+<P>The <TT>priority</TT> attribute type is xs:nonNegativeInteger - its value 
+MUST be a non-negative integer value. The attribute works in a similar manner to 
+DNS records priority, where the lowest value has the highest priority. This 
+means zero has the highest priority and infinity - represented as the value 
+<TT>null</TT> - carries the lowest priority. If omitted, the element's priority 
+value defaults to <TT>null</TT>, however, instead of omitting the attribute, it 
+is RECOMMENDED to set the priority value to <TT>10</TT>. When a Service Provider 
+wishes to indicate a very low priority, it is RECOMMENDED to use a large finite 
+value (100 or higher) rather than explicitly use the value <TT>null</TT>. </P>
+<P>Consumers SHOULD select the element with the highest priority - the lowest 
+numeric value of the priority attribute. In the following example, the URIs 
+decreasing order of priority is <TT>0</TT>, <TT>10</TT>, <TT>11</TT>, 
+<TT>25</TT>, and last <TT>null</TT> and the element with the omitted attribute 
+(equally low). </P>
+<DIV style="MARGIN-LEFT: 3em; WIDTH: 0pt; MARGIN-RIGHT: auto"><PRE>      &lt;Service&gt;
+          &lt;URI priority="10"&gt;http://example.com/second&lt;/URI&gt;
+          &lt;URI priority="null"&gt;http://example.com/lowest&lt;/URI&gt;
+          &lt;URI priority="25"&gt;http://example.com/fourth&lt;/URI&gt;
+          &lt;URI priority="11"&gt;http://example.com/third&lt;/URI&gt;
+          &lt;URI priority="0"&gt;http://example.com/highest&lt;/URI&gt;
+          &lt;URI&gt;http://example.com/lowest&lt;/URI&gt;
+      &lt;/Service&gt;
+</PRE></DIV>
+<P></P>
+<P>If two or more instances of the same element type have identical priority 
+attribute values (including the <TT>null</TT> value), the Consumer SHOULD select 
+one of the instances at random. The Consumer SHOULD NOT choose the first 
+instance that appears in XML document order. This is needed to support the 
+Service Provider's redundancy or load balancing intentions. </P>
+<P>The element selected according to these rules is referred to as the highest 
+priority element. If this element is subsequently disqualified from the set of 
+qualified elements, the Consumer SHOULD attempt to select the next highest 
+priority element. This process SHOULD be continued for all other instances of 
+the qualified elements until success is achieved or all instances are exhausted. 
+</P><A name=anchor8></A><BR>
+<HR>
+
+<TABLE class=TOCbug cellSpacing=2 cellPadding=0 align=right summary=layout>
+  <TBODY>
+  <TR>
+    <TD class=TOCbug><A 
+      href="http://xrds-simple.net/core/1.0/#toc">&nbsp;TOC&nbsp;</A></TD></TR></TBODY></TABLE><A 
+name=rfc.section.6.5></A>
+<H3>6.5.&nbsp; Non-XRDS Elements and Attributes</H3>
+<P>XRDS-Simple introduces a few new elements and attributes not defined in XRDS 
+which are needed for an easier adoption of the format with HTTP Resources. In 
+order to maintain full compatibility, these are defined under a separate 
+namespace, and do not change the discovery workflow. </P>
+<P>To use the extensions the <TT>http://xrds-simple.net/core/1.0</TT> namespace 
+MUST be defined. The namespace alias <TT>simple</TT> is shown as an example, and 
+can be set to any valid XML namespace alias. For example: </P>
+<DIV style="MARGIN-LEFT: 3em; WIDTH: 0pt; MARGIN-RIGHT: auto"><PRE>      &lt;XRDS xmlns="xri://$xrds"&gt;
+          &lt;XRD xmlns:simple="http://xrds-simple.net/core/1.0" xmlns="xri://$XRD*($v*2.0)" version="2.0"&gt;
+              &lt;Type&gt;xri://$xrds*simple&lt;/Type&gt;
+              &lt;Service&gt;
+                &lt;Type&gt;http://example.net/some_type&lt;/Type&gt;
+                &lt;URI simple:httpMethod="POST"&gt;http://example.com/resource&lt;/URI&gt;
+              &lt;/Service&gt;
+          &lt;/XRD&gt;
+      &lt;/XRDS&gt;
+</PRE></DIV>
+<P></P><A name=httpMethod_attribute></A><BR>
+<HR>
+
+<TABLE class=TOCbug cellSpacing=2 cellPadding=0 align=right summary=layout>
+  <TBODY>
+  <TR>
+    <TD class=TOCbug><A 
+      href="http://xrds-simple.net/core/1.0/#toc">&nbsp;TOC&nbsp;</A></TD></TR></TBODY></TABLE><A 
+name=rfc.section.6.5.1></A>
+<H3>6.5.1.&nbsp; simple:httpMethod Attribute</H3>
+<P>The <TT>simple:httpMethod</TT> attribute provides the HTTP method needed to 
+request the Resource provided at the Endpoint specified by the <TT>URI</TT> 
+element. The attribute value type is xs:string, is case-sensitive, and is any 
+accepted HTTP verb by the provider of the Resource (for example, the HTTP 
+methods defined in <A class=info 
+href="http://xrds-simple.net/core/1.0/#RFC2616">[RFC2616]<SPAN> (</SPAN><SPAN 
+class=info>Fielding, R., Gettys, J., Mogul, J., Frystyk, H., Masinter, L., 
+Leach, P., and T. Berners-Lee, “Hypertext Transfer Protocol -- HTTP/1.1,” 
+.</SPAN><SPAN>)</SPAN></A> section 9). If omitted, the method is assumed to be 
+specified by other means, such as implicitly defined by the type or media-type 
+of the Resource. </P><A name=MustSupport_element></A><BR>
+<HR>
+
+<TABLE class=TOCbug cellSpacing=2 cellPadding=0 align=right summary=layout>
+  <TBODY>
+  <TR>
+    <TD class=TOCbug><A 
+      href="http://xrds-simple.net/core/1.0/#toc">&nbsp;TOC&nbsp;</A></TD></TR></TBODY></TABLE><A 
+name=rfc.section.6.5.2></A>
+<H3>6.5.2.&nbsp; simple:MustSupport Element</H3>
+<P>The <TT>simple:MustSupport</TT> element indicates that a Resource has certain 
+requirements that MUST be supported by the Consumer in order to be utilized. 
+Similar to the <TT>Type</TT> element, the <TT>simple:MustSupport</TT> element 
+uses namespace URIs to describe the Resource. It instructs Consumer that the 
+Resource requires some additional understanding beyond matching some of the 
+types or media-types. Consumers SHOULD always check for unknown 
+<TT>simple:MustSupport</TT> element values before selecting or utilizing the 
+Resource description. </P>
+<P>The element can be considered a sub-type, but carries the additional 
+functionality of instructing the Consumer of a hard requirement. Generally, 
+Resources can have many types and media-types, and are selected by ensuring the 
+desired types and media-types are present, while ignoring others of no value or 
+unknown. <TT>simple:MustSupport</TT> provides a way in which parsers can check 
+to see if they are at all capable of interacting with a Resource, even if they 
+are familiar with some of its types and media-types. </P>
+<P>In some cases, an overlap exists between the <TT>Type</TT> and 
+<TT>simple:MustSupport</TT> elements. In those cases, both elements SHOULD be 
+included to maintain consistency with existing practices. For example, OpenID 
+uses <TT>Type</TT> elements to document both the type of the Endpoint, as well 
+as the OpenID extensions it supports. If one of these extensions is REQUIRED, 
+its namespace identifier SHOULD appear in both a <TT>Type</TT> and 
+<TT>simple:MustSupport</TT> elements, within the same <TT>Service</TT> element. 
+</P>
+<P>While this element can be defined in a seperate specification, it is included 
+as part of XRDS-Simple to establish a mechanism for Consumers to detect when 
+they are unable to utilize a discovered Resource. </P><A name=anchor9></A><BR>
+<HR>
+
+<TABLE class=TOCbug cellSpacing=2 cellPadding=0 align=right summary=layout>
+  <TBODY>
+  <TR>
+    <TD class=TOCbug><A 
+      href="http://xrds-simple.net/core/1.0/#toc">&nbsp;TOC&nbsp;</A></TD></TR></TBODY></TABLE><A 
+name=rfc.section.6.6></A>
+<H3>6.6.&nbsp; Extension and Deviation</H3>
+<P>XRDS-Simple inherits the extendibility of XRDS but places strict limitations 
+on the ability to extend the format. Any extension used MUST NOT define or cause 
+any deviation from the meaning and workflow defined in this specification with 
+regard to the discovery process. Extensions MUST be restricted to add only 
+Resource-specific descriptions. </P>
+<P>This is particularly true to XRDS elements and attributes not explicitly 
+listed and allowed in this specification, as they might significantly alter the 
+way in which a document is parsed and Endpoints selected. For a document to 
+legally declare itself as XRDS-Simple, it must be fully compatible with any 
+compliant XRDS-Simple parser, as well as any compliant XRDS parser. </P>
+<P>XRDS-Simple parsers SHOULD look for the existence of a valid XRDS-Simple 
+declaration before parsing any XRDS documents, as they MAY otherwise produce 
+incorrect results. It is also RECOMMENDED that XRDS-Simple parsers attempting to 
+parse XRDS documents, include logic to check for elements excluded from 
+XRDS-Simple which are known to significantly alter the discovery process. This 
+includes but not limited to the <TT>Redirect</TT> and <TT>Ref</TT> elements, and 
+the <TT>match</TT> and <TT>select</TT> attributes, defined in <A class=info 
+href="http://xrds-simple.net/core/1.0/#XRI%20Resolution%202.0">[XRI Resolution 
+2.0]<SPAN> (</SPAN><SPAN class=info>Wachob, G., Reed, D., Chasen, L., Tan, W., 
+and S. Churchill, “Extensible Resource Identifier (XRI) Resolution V2.0,” 
+.</SPAN><SPAN>)</SPAN></A>. </P><A name=anchor10></A><BR>
+<HR>
+
+<TABLE class=TOCbug cellSpacing=2 cellPadding=0 align=right summary=layout>
+  <TBODY>
+  <TR>
+    <TD class=TOCbug><A 
+      href="http://xrds-simple.net/core/1.0/#toc">&nbsp;TOC&nbsp;</A></TD></TR></TBODY></TABLE><A 
+name=rfc.section.7></A>
+<H3>7.&nbsp; Resource Descriptions Selection</H3>
+<P>The Resource Description Document provides lists of Resource descriptions 
+grouped together. Once the document has been obtained, the Consumer typically 
+performs Resource descriptions selection, to extract the descriptions of the 
+Resources relevant to it. The selection process centers around iterating through 
+the list of Resource descriptions, filtering them based on their type and 
+media-type, and selecting them based on their relative priorities. </P>
+<P>The Resource descriptions selection process includes two steps: </P>
+<OL class=text>
+  <LI>Identify the <TT>XRD</TT> element describing the desired Resource or group 
+  of Resources. 
+  <LI>Select the <TT>Service</TT> elements matching against the Consumer's 
+  desired criteria. </LI></OL>
+<P></P><A name=xrd_identification></A><BR>
+<HR>
+
+<TABLE class=TOCbug cellSpacing=2 cellPadding=0 align=right summary=layout>
+  <TBODY>
+  <TR>
+    <TD class=TOCbug><A 
+      href="http://xrds-simple.net/core/1.0/#toc">&nbsp;TOC&nbsp;</A></TD></TR></TBODY></TABLE><A 
+name=rfc.section.7.1></A>
+<H3>7.1.&nbsp; XRD Identification</H3>
+<P>Identifying an <TT>XRD</TT> element within an XRDS-Simple document is done by 
+following the identification rules: </P>
+<OL class=text>
+  <LI>The Consumer MUST find all the XRDS-Simple compliant <TT>XRD</TT> elements 
+  as defined in <A class=info 
+  href="http://xrds-simple.net/core/1.0/#requirements">Section&nbsp;6.1<SPAN> 
+  (</SPAN><SPAN class=info>Declarations and 
+  Requirements</SPAN><SPAN>)</SPAN></A>, excluding any expired elements as 
+  defined by the <A class=info 
+  href="http://xrds-simple.net/core/1.0/#xrd_element">Expired child 
+  element<SPAN> (</SPAN><SPAN class=info>XRD Element</SPAN><SPAN>)</SPAN></A>. 
+  Any other elements SHALL be ignored in the steps that follow. The Consumer MAY 
+  choose to filter the list of <TT>XRD</TT> elements further by looking for 
+  additional <TT>Type</TT> elements matches at the <TT>XRD</TT> level. 
+  <LI>If the document's location includes a URI fragment as defined in <A 
+  class=info 
+  href="http://xrds-simple.net/core/1.0/#go_fetch">Section&nbsp;5.2<SPAN> 
+  (</SPAN><SPAN class=info>Requesting Document</SPAN><SPAN>)</SPAN></A>, the 
+  Consumer MUST look for an <TT>XRD</TT> element with an <TT>xml:id</TT> 
+  attribute value matching the XRD identifier indicated by the URI fragment. If 
+  a match is found, the <TT>XRD</TT> element is used as defined in <A class=info 
+  href="http://xrds-simple.net/core/1.0/#service_selection">Section&nbsp;7.2<SPAN> 
+  (</SPAN><SPAN class=info>Service Selection</SPAN><SPAN>)</SPAN></A>, otherwise 
+  the discovery process ends unsuccessfully. 
+  <LI>If the document contains a single <TT>XRD</TT> element, it is used as 
+  defined in <A class=info 
+  href="http://xrds-simple.net/core/1.0/#service_selection">Section&nbsp;7.2<SPAN> 
+  (</SPAN><SPAN class=info>Service Selection</SPAN><SPAN>)</SPAN></A>. 
+  <LI>If the document contains multiple <TT>XRD</TT> elements, the last element 
+  is used as defined in <A class=info 
+  href="http://xrds-simple.net/core/1.0/#service_selection">Section&nbsp;7.2<SPAN> 
+  (</SPAN><SPAN class=info>Service Selection</SPAN><SPAN>)</SPAN></A>. </LI></OL>
+<P></P><A name=service_selection></A><BR>
+<HR>
+
+<TABLE class=TOCbug cellSpacing=2 cellPadding=0 align=right summary=layout>
+  <TBODY>
+  <TR>
+    <TD class=TOCbug><A 
+      href="http://xrds-simple.net/core/1.0/#toc">&nbsp;TOC&nbsp;</A></TD></TR></TBODY></TABLE><A 
+name=rfc.section.7.2></A>
+<H3>7.2.&nbsp; Service Selection</H3>
+<P>Based on the Consumer's needs, the Consumer defines a selection criteria 
+based on the presence (or lack of) certain Resource types and media-types. The 
+selection criteria can be any combination of type and media-type values desired 
+by the Consumer, as well as looking for specific Endpoint URIs. For example, a 
+Consumer can look for all Resource descriptions with an image media-type, an 
+Endpoint with OpenID authentication type, or the description of a specific 
+Resource given its Endpoint URI. </P>
+<P>If the selection criteria places higher preference on the presence of certain 
+types or media-types over others, it is handled by performing multiple 
+selections. Each selection is assigned preference order based on the Consumer 
+needs and the selection results are compared to determine the most desired set. 
+For example, if a Consumer is looking for all image Resources, giving higher 
+preference to the JPEG formats over PNG, it will perform two selection 
+processes, one for each media-type, and assign the Resources in the JPEG set a 
+higher preference value. </P>
+<P>Once an <TT>XRD</TT> element has been identified, the Consumer performs the 
+following steps in order to select the desired Resource descriptions: </P>
+<OL class=text>
+  <LI>Each <TT>Service</TT> element is compared against the selection criteria 
+  by comparing the values of the <TT>Type</TT>, <TT>MediaType</TT>, and 
+  <TT>URI</TT> elements to those defined by the selection criteria. 
+  <LI>The Consumer SHOULD inspect the matching <TT>Service</TT> elements for 
+  <TT>simple:MustSupport</TT> elements, and remove from the list any 
+  <TT>Service</TT> elements with unknown <TT>simple:MustSupport</TT> values. 
+  <LI>If more than one <TT>Service</TT> element is matched, the Consumer MUST 
+  use the <TT>priority</TT> attribute values to find the highest priority 
+  element as defined in <A class=info 
+  href="http://xrds-simple.net/core/1.0/#priority_attribute">Section&nbsp;6.4<SPAN> 
+  (</SPAN><SPAN class=info>priority Attribute</SPAN><SPAN>)</SPAN></A>. 
+  <LI>Within the priority sorted list of matching <TT>Service</TT> elements, if 
+  more than one <TT>URI</TT> or <TT>LocalID</TT> elements are present, the 
+  Consumer MUST use the <TT>priority</TT> attribute values of each element type 
+  to find the highest priority element as defined in <A class=info 
+  href="http://xrds-simple.net/core/1.0/#priority_attribute">Section&nbsp;6.4<SPAN> 
+  (</SPAN><SPAN class=info>priority Attribute</SPAN><SPAN>)</SPAN></A>. </LI></OL>
+<P></P>
+<P>At the conclusion of the selection process, if any of the Resource 
+descriptions matched the selection criteria, the Consumer will obtain a list of 
+Resource descriptions, sorted by their matching preference and priorities. 
+</P><A name=anchor11></A><BR>
+<HR>
+
+<TABLE class=TOCbug cellSpacing=2 cellPadding=0 align=right summary=layout>
+  <TBODY>
+  <TR>
+    <TD class=TOCbug><A 
+      href="http://xrds-simple.net/core/1.0/#toc">&nbsp;TOC&nbsp;</A></TD></TR></TBODY></TABLE><A 
+name=rfc.section.A></A>
+<H3>Appendix A.&nbsp; Example</H3>
+<P>The following example list the stores in which an individual name Jane Doe 
+created wish-lists for her friends to use to buy her presents. The examples 
+assumes an open standard has been established for wish-list representation, 
+which is identified by the namespace URI 
+<TT>http://specs.example.com/wish_list/1.0</TT>. According to the wish-list 
+specification, requests for a user's wish list include the user's screen name in 
+a URL-encoded parameter. </P>
+<DIV style="MARGIN-LEFT: 3em; WIDTH: 0pt; MARGIN-RIGHT: auto"><PRE>      &lt;XRDS xmlns="xri://$xrds"&gt;
+          &lt;XRD xmlns:simple="http://xrds-simple.net/core/1.0" xmlns="xri://$XRD*($v*2.0)" version="2.0"&gt;
+              &lt;Type&gt;xri://$xrds*simple&lt;/Type&gt;
+              &lt;Service priority="10"&gt;
+                &lt;Type&gt;http://specs.example.com/wish_list/1.0&lt;/Type&gt;
+                &lt;URI simple:httpMethod="GET"&gt;http://books.example.com/wishlist&lt;/URI&gt;
+                &lt;LocalID&gt;jane&lt;LocalID&gt;
+              &lt;/Service&gt;
+              &lt;Service priority="20"&gt;
+                &lt;Type&gt;http://specs.example.com/wish_list/1.0&lt;/Type&gt;
+                &lt;URI simple:httpMethod="GET" priority="10"&gt;https://dvds.example.org/lists/wishes&lt;/URI&gt;
+                &lt;URI simple:httpMethod="GET" priority="20"&gt;http://dvds.example.org/lists/wishes&lt;/URI&gt;
+                &lt;LocalID&gt;janedoe&lt;LocalID&gt;
+              &lt;/Service&gt;
+          &lt;/XRD&gt;
+      &lt;/XRDS&gt;
+</PRE></DIV>
+<P></P><A name=anchor12></A><BR>
+<HR>
+
+<TABLE class=TOCbug cellSpacing=2 cellPadding=0 align=right summary=layout>
+  <TBODY>
+  <TR>
+    <TD class=TOCbug><A 
+      href="http://xrds-simple.net/core/1.0/#toc">&nbsp;TOC&nbsp;</A></TD></TR></TBODY></TABLE><A 
+name=rfc.section.B></A>
+<H3>Appendix B.&nbsp; History of XRDS</H3>
+<P>The XRDS discovery document format originated at the OASIS XRI (Extensible 
+Resource Identifier) Technical Committee working in conjunction with the early 
+OpenID community. The acronym XRDS - Extensible Resource Descriptor Sequence - 
+was coined out of discussions between XRI TC members and OpenID developers at 
+first Internet Identity Workshop held in Berkeley, CA in October 2005. </P>
+<P><A class=info 
+href="http://xrds-simple.net/core/1.0/#OpenID%20Authentication%201.1">[OpenID 
+Authentication 1.1]<SPAN> (</SPAN><SPAN class=info>Recordon, D. and B. 
+Fitzpatrick, “OpenID Authentication 1.1,” .</SPAN><SPAN>)</SPAN></A> needed an 
+HTTP(S)-based service discovery mechanism for URLs, and the XRI TC had already 
+defined an HTTP(S)-based resolution mechanism and a general-purpose service 
+discovery format for XRIs (a new type of abstract structured identifier). With a 
+few changes, a subset of the XRDS functionality defined by the XRI Resolution 
+specification would work with both URLs and XRIs. This subset was formalized as 
+the <A class=info href="http://xrds-simple.net/core/1.0/#Yadis">[Yadis]<SPAN> 
+(</SPAN><SPAN class=info>Miller, J., “Yadis Specification 1.0,” 
+.</SPAN><SPAN>)</SPAN></A> specification published by Yadis.org in March 2006, 
+and Yadis subsequently became the service discovery format for OpenID 1.1. </P>
+<P>A single discovery service for both URLs and XRIs proved to be so popular 
+that in November 2007 the <A class=info 
+href="http://xrds-simple.net/core/1.0/#XRI%20Resolution%202.0">[XRI Resolution 
+2.0]<SPAN> (</SPAN><SPAN class=info>Wachob, G., Reed, D., Chasen, L., Tan, W., 
+and S. Churchill, “Extensible Resource Identifier (XRI) Resolution V2.0,” 
+.</SPAN><SPAN>)</SPAN></A> specification formally added the Yadis method for 
+URL-based XRDS discovery (Section 6). The <A class=info 
+href="http://xrds-simple.net/core/1.0/#OpenID%20Authentication%202.0">[OpenID 
+Authentication 2.0]<SPAN> (</SPAN><SPAN class=info>OpenID, O., “OpenID 
+Authentication 2.0,” .</SPAN><SPAN>)</SPAN></A> specification released in 
+December 2007 referenced this updated specification. Since other applications 
+and protocols needed only a subset of XRDS functionality, work begin on formally 
+defining this subset as XRDS-Simple. </P><A name=anchor13></A><BR>
+<HR>
+
+<TABLE class=TOCbug cellSpacing=2 cellPadding=0 align=right summary=layout>
+  <TBODY>
+  <TR>
+    <TD class=TOCbug><A 
+      href="http://xrds-simple.net/core/1.0/#toc">&nbsp;TOC&nbsp;</A></TD></TR></TBODY></TABLE><A 
+name=rfc.section.C></A>
+<H3>Appendix C.&nbsp; Security Considerations</H3>
+<P></P><A name=anchor14></A><BR>
+<HR>
+
+<TABLE class=TOCbug cellSpacing=2 cellPadding=0 align=right summary=layout>
+  <TBODY>
+  <TR>
+    <TD class=TOCbug><A 
+      href="http://xrds-simple.net/core/1.0/#toc">&nbsp;TOC&nbsp;</A></TD></TR></TBODY></TABLE><A 
+name=rfc.section.D></A>
+<H3>Appendix D.&nbsp; Acknowledgments</H3>
+<P>XRDS-Simple is for the most part, an evolution of many existing 
+specifications, most notably <A class=info 
+href="http://xrds-simple.net/core/1.0/#XRI%20Resolution%202.0">[XRI Resolution 
+2.0]<SPAN> (</SPAN><SPAN class=info>Wachob, G., Reed, D., Chasen, L., Tan, W., 
+and S. Churchill, “Extensible Resource Identifier (XRI) Resolution V2.0,” 
+.</SPAN><SPAN>)</SPAN></A> and <A class=info 
+href="http://xrds-simple.net/core/1.0/#Yadis">[Yadis]<SPAN> (</SPAN><SPAN 
+class=info>Miller, J., “Yadis Specification 1.0,” .</SPAN><SPAN>)</SPAN></A>. 
+Much of the text in this specification has been adopted directly from these two 
+specifications in an attempt to provide implementers an accessible reference for 
+resource discovery. </P>
+<P>The editor would like to thank the members of the OASIS XRI TC for their 
+dedicated work bringing the XRDS format to its current state, and for 
+accommodating the XRDS-Simple use case within XRDS and the <A class=info 
+href="http://xrds-simple.net/core/1.0/#XRI%20Resolution%202.0">[XRI Resolution 
+2.0]<SPAN> (</SPAN><SPAN class=info>Wachob, G., Reed, D., Chasen, L., Tan, W., 
+and S. Churchill, “Extensible Resource Identifier (XRI) Resolution V2.0,” 
+.</SPAN><SPAN>)</SPAN></A> specification. In particular, the editor would like 
+to thank Drummond Reed and Gabe Wachob for their active role in the creation of 
+XRDS-Simple, as well as Markus Sabadello and William Tan for their 
+participation. </P>
+<P>The editor would like to thank Chris Messina, John Panzer, and David Recordon 
+for their continued support and assistance. </P><A name=rfc.references1></A><BR>
+<HR>
+
+<TABLE class=TOCbug cellSpacing=2 cellPadding=0 align=right summary=layout>
+  <TBODY>
+  <TR>
+    <TD class=TOCbug><A 
+      href="http://xrds-simple.net/core/1.0/#toc">&nbsp;TOC&nbsp;</A></TD></TR></TBODY></TABLE>
+<H3>8.&nbsp;References</H3>
+<TABLE width="99%" border=0>
+  <TBODY>
+  <TR>
+    <TD class=author-text vAlign=top><A 
+      name="OpenID Authentication 1.1">[OpenID Authentication 1.1]</A></TD>
+    <TD class=author-text>Recordon, D. and B. Fitzpatrick, “<A 
+      href="http://openid.net/specs/openid-authentication-1_1.html">OpenID 
+      Authentication 1.1</A>.”</TD></TR>
+  <TR>
+    <TD class=author-text vAlign=top><A 
+      name="OpenID Authentication 2.0">[OpenID Authentication 2.0]</A></TD>
+    <TD class=author-text>OpenID, O., “<A 
+      href="http://openid.net/specs/openid-authentication-2_0.html">OpenID 
+      Authentication 2.0</A>.”</TD></TR>
+  <TR>
+    <TD class=author-text vAlign=top><A name=RFC2046>[RFC2046]</A></TD>
+    <TD class=author-text>Freed, N. and N. Borenstein, “<A 
+      href="http://tools.ietf.org/html/rfc2046">Multipurpose Internet Mail 
+      Extensions (MIME) Part Two: Media Types</A>,” RFC&nbsp;2046.</TD></TR>
+  <TR>
+    <TD class=author-text vAlign=top><A name=RFC2119>[RFC2119]</A></TD>
+    <TD class=author-text>Bradner, B., “<A 
+      href="http://tools.ietf.org/html/rfc2119">Key words for use in RFCs to 
+      Indicate Requirement Levels</A>,” RFC&nbsp;2119.</TD></TR>
+  <TR>
+    <TD class=author-text vAlign=top><A name=RFC2606>[RFC2606]</A></TD>
+    <TD class=author-text>Eastlake, D. and A. Panitz, “<A 
+      href="http://tools.ietf.org/html/rfc2606">Reserved Top Level DNS 
+      Names</A>,” RFC&nbsp;2606.</TD></TR>
+  <TR>
+    <TD class=author-text vAlign=top><A name=RFC2616>[RFC2616]</A></TD>
+    <TD class=author-text>Fielding, R., Gettys, J., Mogul, J., Frystyk, H., 
+      Masinter, L., Leach, P., and T. Berners-Lee, “<A 
+      href="http://tools.ietf.org/html/rfc2616">Hypertext Transfer Protocol -- 
+      HTTP/1.1</A>,” RFC&nbsp;2616.</TD></TR>
+  <TR>
+    <TD class=author-text vAlign=top><A name="XRI Resolution 2.0">[XRI 
+      Resolution 2.0]</A></TD>
+    <TD class=author-text>Wachob, G., Reed, D., Chasen, L., Tan, W., and S. 
+      Churchill, “Extensible Resource Identifier (XRI) Resolution V2.0” (<A 
+      href="http://docs.oasis-open.org/xri/2.0/specs/xri-resolution-V2.0.html">HTML</A>, 
+      <A 
+      href="http://docs.oasis-open.org/xri/2.0/specs/xri-resolution-V2.0.pdf">PDF</A>).</TD></TR>
+  <TR>
+    <TD class=author-text vAlign=top><A name=Yadis>[Yadis]</A></TD>
+    <TD class=author-text>Miller, J., “Yadis Specification 1.0” (<A 
+      href="http://yadis.org/papers/yadis-v1.0.pdf">PDF</A>, <A 
+      href="http://yadis.org/papers/yadis-v1.0.odt">ODT</A>).</TD></TR>
+  <TR>
+    <TD class=author-text vAlign=top><A name=xml:id>[xml:id]</A></TD>
+    <TD class=author-text>Marsh, J., Veillard, D., and N. Walsh, “<A 
+      href="http://www.w3.org/TR/xml-id/">xml:id Version 1.0, World Wide Web 
+      Consortium</A>.”</TD></TR></TBODY></TABLE><A name=rfc.authors></A><BR>
+<HR>
+
+<TABLE class=TOCbug cellSpacing=2 cellPadding=0 align=right summary=layout>
+  <TBODY>
+  <TR>
+    <TD class=TOCbug><A 
+      href="http://xrds-simple.net/core/1.0/#toc">&nbsp;TOC&nbsp;</A></TD></TR></TBODY></TABLE>
+<H3>Author's Address</H3>
+<TABLE cellSpacing=0 cellPadding=0 width="99%" border=0>
+  <TBODY>
+  <TR>
+    <TD class=author-text>&nbsp;</TD>
+    <TD class=author-text>Eran Hammer-Lahav</TD></TR>
+  <TR>
+    <TD class=author-text>&nbsp;</TD>
+    <TD class=author-text>Hueniverse, LLC</TD></TR>
+  <TR>
+    <TD class=author align=right>Email:&nbsp;</TD>
+    <TD class=author-text><A 
+      href="mailto:eran@hueniverse.com">eran@hueniverse.com</A></TD></TR></TBODY></TABLE>
+<SCRIPT type=text/javascript>
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</SCRIPT>
+
+<SCRIPT type=text/javascript>
+var pageTracker = _gat._getTracker("UA-2349963-5");
+pageTracker._initData();
+pageTracker._trackPageview();
+</SCRIPT>
+</BODY></HTML>
