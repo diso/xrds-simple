@@ -13,7 +13,7 @@
   <?rfc private="Implementers' Draft" ?>
 
   <front>
-    <title abbrev="XRDS-Simple 1.0 D1">XRDS-Simple 1.0 Draft 1</title>
+    <title abbrev="XRDS-Simple 1.0 Dp2">XRDS-Simple 1.0 Draft pre-2</title>
 
     <author initials="E" surname="Hammer-Lahav (Editor)" fullname="Eran Hammer-Lahav">
       <organization>Hueniverse, LLC</organization>
@@ -234,7 +234,7 @@
 
       <section title="Requesting Document" anchor="go_fetch">
         <t>
-          Once the document's location has been obtains, the Consumer MUST check if it is identical to the
+          Once the document's location has been obtained, the Consumer MUST check if it is identical to the
           Endpoint to avoid a loop (ignoring any differences in the URI fragments), in which case
           the discovery workflow ends unsuccessfully. Otherwise, the Consumer MUST request the XRDS document from
           the location URI using an HTTP(S) <spanx style="verb">GET</spanx>. This request SHOULD an
