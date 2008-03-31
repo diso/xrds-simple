@@ -65,7 +65,7 @@
           </t>
           <t hangText="Resource Description Document">
             An XML-formatted document providing a machine-readable list
-            of Resources descriptions and their Endpoints.
+            of Resource descriptions and their Endpoints.
           </t>
           <t hangText="Service Provider:">
             A web application offering XRDS-Simple discovery information about its
