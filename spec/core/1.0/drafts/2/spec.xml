@@ -13,20 +13,20 @@
   <?rfc private="Implementers' Draft" ?>
 
   <front>
-    <title abbrev="XRDS-Simple 1.0 Dp2">XRDS-Simple 1.0 Draft pre-2</title>
+    <title abbrev="XRDS-Simple 1.0 D2">XRDS-Simple 1.0 Draft 2</title>
 
-    <author initials="E" surname="Hammer-Lahav (Editor)" fullname="Eran Hammer-Lahav">
-      <organization>Hueniverse</organization>
+    <author initials="E" surname="Hammer-Lahav" fullname="Eran Hammer-Lahav">
+      <organization>Yahoo!</organization>
       <address>
-        <email>eran@hueniverse.com</email>
+        <email>blade@yahoo-inc.com</email>
       </address>
     </author>
 
-    <date day="26" month="March" year="2008"/>
+    <date day="18" month="June" year="2008"/>
 
     <abstract>
       <t>
-        XRDS-Simple provides a format and workflow for the discovery of resources
+        XRDS-Simple provides a format and workflow for the discovery of resource
         metadata, and other linked resources. As web services continue to grow,
         applications utilize a wider range of web services and resources across
         multiple providers. XRDS-Simple allows providers to document their resources
@@ -58,18 +58,18 @@
       <t>
         <list style="hanging">
           <t hangText="Resource:">
-            A URI-addressable network document or service.
+            A network document or service addressable using an HTTP URI.
           </t>
           <t hangText="Endpoint:">
-            An absolute URI at which a Resource is available on the network.
+            An absolute HTTP URI at which a Resource is available on the network.
           </t>
           <t hangText="Resource Description Document">
             An XML-formatted document providing a machine-readable list
             of Resource descriptions and their Endpoints.
           </t>
           <t hangText="Service Provider:">
-            A web application offering XRDS-Simple discovery information about its
-            Resources and related Resources offered by other providers.
+            A web application supporting XRDS-Simple discovery and providing machine-readable
+            information about its Resources.
           </t>
           <t hangText="Consumer:">
             A website or application that uses XRDS-Simple to discovery information
@@ -78,27 +78,44 @@
         </list>
       </t>
     </section>
-    
+
     <section title="Introduction">
       <t>
-        XRDS-Simple defines a subset of the XRDS format defined in <xref target="XRI Resolution 2.0" />,
-        with a small set of extensions. In this specification, XRDS refers to the full format defined
-        in <xref target="XRI Resolution 2.0" />, while XRDS-Simple refers to the subset of XRDS and
-        the extensions defined in <xref target="xrds_simple_format" />.
+        XRDS-Simple provides a discovery protocol and document format which add
+        machine-readable metadata for HTTP-based Resources. It defines a method
+        in which an HTTP URI can be queried for its attributes and related Resources.
+        The metadata allows Consumers to enhance their interaction with the Resource
+        by understanding its interface, access methods, and relationship to other Resources.
       </t>
       <t>
-        The goal of XRDS-Simple is to provide a lightweight version of XRDS that simplifies the
-        implementation of parsers while maintaining full compatibility with XRDS and any XRDS-compliant
-        parsers and resolvers. It also serves as an introduction to XRDS, giving implementers an upgrade
-        path to other XRDS features when appropriate.
+        XRDS-Simple does not attempt to replace <xref target="Microformats" />, but addresses the
+        use cases in which the Resource is not HTML, or when the metadata is not
+        appropriete for end-user display. While the HTTP header provides general container for
+        metadata about a Resource, it is not appropriate for large payloads.
       </t>
-      <t>
-        By defining XRDS-Simple, implementers can both declare the scope of their application and
-        capabilities, as well as perform tests to assert that their application is capable of
-        processing input documents exactly as they were intended. This is of particular importance
-        when processing documents with security or identity information, where misinterpretation
-        of the document can lead to a breach of security.
-      </t>
+
+      <section title="Relationship to XRDS">
+        <t>
+          XRDS-Simple defines a subset of the XRDS format defined in <xref target="XRI Resolution 2.0" />,
+          with a small set of extensions. In this specification, XRDS refers to the full format defined
+          in <xref target="XRI Resolution 2.0" />, while XRDS-Simple refers to the subset of XRDS and
+          the extensions defined in <xref target="xrds_simple_format" />.
+        </t>
+        <t>
+          The goal of XRDS-Simple is to provide a lightweight version of XRDS that simplifies the
+          implementation of parsers while maintaining full compatibility with XRDS and any XRDS-compliant
+          parsers and resolvers. It also serves as an introduction to XRDS, giving implementers an upgrade
+          path to other XRDS features when appropriate.
+        </t>
+        <t>
+          By defining XRDS-Simple, implementers can both declare the scope of their application and
+          capabilities, as well as perform tests to assert that their application is capable of
+          processing input documents exactly as they were intended. This is of particular importance
+          when processing documents with security or identity information, where misinterpretation
+          of the document can lead to a breach of security.
+        </t>
+      </section>
+      
     </section>
 
     <section title="Workflow Overview">
@@ -876,6 +893,16 @@
         </front>
         <format type='PDF' target="http://yadis.org/papers/yadis-v1.0.pdf" />
         <format type='ODT' target="http://yadis.org/papers/yadis-v1.0.odt" />
+      </reference>
+
+      <reference anchor="Microformats">
+        <front>
+          <title>Microformats Specifications</title>
+          <author initials='' surname='Microformats Community' fullname="Microformats Community">
+            <organization></organization>
+          </author>
+        </front>
+        <format type='HTML' target="http://microformats.org/" />
       </reference>
 
       <reference anchor="xml:id">
