@@ -18,11 +18,11 @@
     <author initials="E" surname="Hammer-Lahav" fullname="Eran Hammer-Lahav">
       <organization>Yahoo!</organization>
       <address>
-        <email>blade@yahoo-inc.com</email>
+        <email>eran@hueniverse.com</email>
       </address>
     </author>
 
-    <date day="18" month="June" year="2008"/>
+    <date day="21" month="June" year="2008"/>
 
     <abstract>
       <t>
@@ -90,8 +90,8 @@
       <t>
         XRDS-Simple does not attempt to replace <xref target="Microformats" />, but addresses the
         use cases in which the Resource is not HTML, or when the metadata is not
-        appropriete for end-user display. While the HTTP header provides general container for
-        metadata about a Resource, it is not appropriate for large payloads.
+        appropriete for end-user display. While the HTTP headers provide general container for
+        metadata about a Resource, they are not appropriate for large payloads.
       </t>
 
       <section title="Relationship to XRDS">
@@ -181,10 +181,6 @@
         </t>
         <t>
           In all cases the HTTP(S) status messages and error codes defined in <xref target="RFC2616" /> SHALL apply.
-          Consumers MUST be able to handle HTTP redirects when requesting the document's location and the Resource
-          Description Document.
-        </t>
-        <t>
           If the Service Provider supports HTTP content negotiation, its responses SHOULD include a
           <spanx style="verb">Vary</spanx> header to allow caches to properly interpret future requests. This
           header SHOULD be present even in the case where an HTML page is returned (instead of an XRDS document).
@@ -193,11 +189,15 @@
         <section title="HEAD Protocol">
           <t>
             Using the HEAD protocol, the Consumer MUST issue an HTTP(S) <spanx style="verb">HEAD</spanx> request to
-            the Endpoint. The request SHOULD include an <spanx style="verb">Accept</spanx> header
+            the Endpoint and include an <spanx style="verb">Accept</spanx> header
             specifying content type <spanx style="verb">application/xrds+xml</spanx>. The response from the Service
             Provider MUST include only headers, which MUST contain one of the following:
             
             <list style="numbers">
+              <t>
+                An HTTP redirect response with a <spanx style="verb">Location</spanx> header which the Consumer
+                MUST follow by reapting the HEAD protocol with the provided URI.
+              </t>
               <t>
                 An <spanx style="verb">X-XRDS-Location</spanx> header where the value of the header MUST
                 be an HTTP(S) URI which gives the document's location.
@@ -210,22 +210,26 @@
             </list>
           </t>
           <t>
-            If both headers are present, the <spanx style="verb">X-XRDS-Location</spanx> header is used and the
-            <spanx style="verb">Content-Type</spanx> header ignored. If neither header is present, the protocol
-            fails and the Consumer MUST attempt the <xref target="get_yadis">GET protocol</xref>.
+            The Consumer MUST check the Service Provider's response for one of the three options in the order they are listed above, and
+            MUST stop as soon as a match is found. If no match is found, the protocol fails and the Consumer MUST attempt
+            the <xref target="get_yadis">GET protocol</xref>.
           </t>
         </section>
 
         <section title="GET Protocol" anchor="get_yadis">
           <t>
             Using the GET protocol, the Consumer MUST issue an HTTP(S) <spanx style="verb">GET</spanx> request to
-            the Endpoint. The request SHOULD include an <spanx style="verb">Accept</spanx> header
+            the Endpoint and include an <spanx style="verb">Accept</spanx> header
             specifying content type <spanx style="verb">application/xrds+xml</spanx>. The Service Provider response
-            MUST be one of three options:
+            MUST be one of four options:
 
             <list style="numbers">
               <t>
-                A Valid XRDS document in the response body. The Response SHOULD include the <spanx style="verb">Content-Type</spanx>
+                An HTTP redirect response with a <spanx style="verb">Location</spanx> header which the Consumer
+                MUST follow by reapting the GET protocol with the provided URI.
+              </t>
+              <t>
+                A valid XRDS document in the response body. The Response SHOULD include the <spanx style="verb">Content-Type</spanx>
                 header with value <spanx style="verb">application/xrds+xml</spanx>. In this case, the response body contains
                 the Resource Description Document and the workflow ends successfully skipping the step described in <xref target="go_fetch" />.
               </t>
@@ -242,7 +246,7 @@
             </list>
           </t>
           <t>
-            The Consumer MUST check the Service Provider's response for one of the three options in the order they are listed above, and
+            The Consumer MUST check the Service Provider's response for one of the four options in the order they are listed above, and
             MUST stop as soon as a match is found. If no match is found, the protocol fails and the discovery workflow ends unsuccessfully.
           </t>
         </section>
@@ -254,8 +258,9 @@
           Once the document's location has been obtained, the Consumer MUST check if it is identical to the
           Endpoint to avoid a loop (ignoring any differences in the URI fragments), in which case
           the discovery workflow ends unsuccessfully. Otherwise, the Consumer MUST request the XRDS document from
-          the location URI using an HTTP(S) <spanx style="verb">GET</spanx>. This request SHOULD an
+          the location URI using an HTTP(S) <spanx style="verb">GET</spanx> request with an
           <spanx style="verb">Accept</spanx> header specifying content type <spanx style="verb">application/xrds+xml</spanx>.
+          Consumers MUST follow any HTTP redirect response received while requesting the Resource Description Document.
         </t>
         <t>
           The Service Provider MUST reply with a Valid XRDS document in the response body. The Response SHOULD include
@@ -312,7 +317,7 @@
         </t>
         <t>
           XRDS-Simple compliant <spanx style="verb">XRD</spanx> elements MUST define the
-          <spanx style="verb">xri://$XRD*($v*2.0)</spanx> namespace as well as include the
+          <spanx style="verb">xri://$xrd*($v*2.0)</spanx> namespace as well as include the
           <spanx style="verb">version</spanx> attribute with value <spanx style="verb">2.0</spanx>.
           They MUST include a <spanx style="verb">Type</spanx> child with value <spanx style="verb">xri://$xrds*simple</spanx>.
           For the remainder of this specification, <spanx style="verb">XRD</spanx> elements refer only to XRDS-Simple compliant
@@ -322,7 +327,7 @@
           <figure>
             <artwork>
       &lt;XRDS xmlns="xri://$xrds"&gt;
-        &lt;XRD xmlns="xri://$XRD*($v*2.0)" version="2.0"&gt;
+        &lt;XRD xmlns="xri://$xrd*($v*2.0)" version="2.0"&gt;
           &lt;Type&gt;xri://$xrds*simple&lt;/Type&gt;
         &lt;/XRD&gt;
       &lt;/XRDS&gt;
@@ -434,8 +439,7 @@
               0 or more per <spanx style="verb">Service</spanx> element with type xs:anyURI. Provides the Endpoint where
               the Resource can be found and used or retrieved. If no <spanx style="verb">URI</spanx> element is defined,
               it is assumed the URI can be obtained by other means not specified in this specification. Supports
-              the OPTIONAL <spanx style="verb">priority</spanx> attribute as defined by <xref target="priority_attribute" />, and
-              the OPTIONAL extension attribute <spanx style="verb">simple:httpMethod</spanx> as defined by <xref target="httpMethod_attribute" />
+              the OPTIONAL <spanx style="verb">priority</spanx> attribute as defined by <xref target="priority_attribute" />.
             </t>
             <t hangText="&lt;LocalID&gt;">
               0 or more per <spanx style="verb">Service</spanx> element with type xs:anyURI. Provides a standard way to indicate
@@ -447,7 +451,12 @@
             <t hangText="&lt;simple:MustSupport&gt;">
               0 or more per <spanx style="verb">Service</spanx> element with type xs:anyURI as defined by <xref target="MustSupport_element" />.
               Defines requirements the Consumer MUST meet in order to utilize the Resource described.
-          </t>
+            </t>
+            <t hangText="&lt;simple:TemplateURI&gt;">
+              0 or more per <spanx style="verb">Service</spanx> element with type xs:string as defined by <xref target="TemplateURI_element" />.
+              Provides a templatized URI which is dynamically constructed in addition or instead of a fixed URI defined by
+              <spanx style="verb">URI</spanx> elements.
+            </t>
           </list>
         </t>
         <t>
@@ -517,29 +526,18 @@
           <figure>
             <artwork>
       &lt;XRDS xmlns="xri://$xrds"&gt;
-          &lt;XRD xmlns:simple="http://xrds-simple.net/core/1.0" xmlns="xri://$XRD*($v*2.0)" version="2.0"&gt;
+          &lt;XRD xmlns:simple="http://xrds-simple.net/core/1.0" xmlns="xri://$xrd*($v*2.0)" version="2.0"&gt;
               &lt;Type&gt;xri://$xrds*simple&lt;/Type&gt;
               &lt;Service&gt;
                 &lt;Type&gt;http://example.net/some_type&lt;/Type&gt;
-                &lt;URI simple:httpMethod="POST"&gt;http://example.com/resource&lt;/URI&gt;
+                &lt;URI&gt;http://example.com/resource&lt;/URI&gt;
+                &lt;simple:MustSupport&gt;http://example.net/some_required_parameter&lt;/simple:MustSupport&gt;
               &lt;/Service&gt;
           &lt;/XRD&gt;
       &lt;/XRDS&gt;
             </artwork>
           </figure>
         </t>
-        
-        <section title="simple:httpMethod Attribute" anchor="httpMethod_attribute">
-          <t>
-            The <spanx style="verb">simple:httpMethod</spanx> attribute provides the
-            HTTP method needed to request the Resource provided at the Endpoint specified by 
-            the <spanx style="verb">URI</spanx> element. The attribute value type is
-            xs:string, is case-sensitive, and is any accepted HTTP verb by the provider of
-            the Resource (for example, the HTTP methods defined in <xref target="RFC2616" /> section 9).
-            If omitted, the method is assumed to be specified by other means, such as implicitly defined
-            by the type or media-type of the Resource.
-          </t>
-        </section>
 
         <section title="simple:MustSupport Element" anchor="MustSupport_element">
           <t>
@@ -570,6 +568,12 @@
           <t>
             While this element can be defined in a seperate specification, it is included as part of XRDS-Simple
             to establish a mechanism for Consumers to detect when they are unable to utilize a discovered Resource.
+          </t>
+        </section>
+
+        <section title="simple:TemplateURI Element" anchor="TemplateURI_element">
+          <t>
+            
           </t>
         </section>
 
@@ -720,18 +724,18 @@
         <figure>
           <artwork>
       &lt;XRDS xmlns="xri://$xrds"&gt;
-          &lt;XRD xmlns:simple="http://xrds-simple.net/core/1.0" xmlns="xri://$XRD*($v*2.0)" version="2.0"&gt;
+          &lt;XRD xmlns:simple="http://xrds-simple.net/core/1.0" xmlns="xri://$xrd*($v*2.0)" version="2.0"&gt;
               &lt;Type&gt;xri://$xrds*simple&lt;/Type&gt;
               &lt;Service priority="10"&gt;
                 &lt;Type&gt;http://specs.example.com/wish_list/1.0&lt;/Type&gt;
-                &lt;URI simple:httpMethod="GET"&gt;http://books.example.com/wishlist&lt;/URI&gt;
-                &lt;LocalID&gt;jane&lt;LocalID&gt;
+                &lt;URI&gt;http://books.example.com/wishlist&lt;/URI&gt;
+                &lt;LocalID&gt;jane&lt;/LocalID&gt;
               &lt;/Service&gt;
               &lt;Service priority="20"&gt;
                 &lt;Type&gt;http://specs.example.com/wish_list/1.0&lt;/Type&gt;
-                &lt;URI simple:httpMethod="GET" priority="10"&gt;https://dvds.example.org/lists/wishes&lt;/URI&gt;
-                &lt;URI simple:httpMethod="GET" priority="20"&gt;http://dvds.example.org/lists/wishes&lt;/URI&gt;
-                &lt;LocalID&gt;janedoe&lt;LocalID&gt;
+                &lt;URI priority="10"&gt;https://dvds.example.org/lists/wishes&lt;/URI&gt;
+                &lt;URI priority="20"&gt;http://dvds.example.org/lists/wishes&lt;/URI&gt;
+                &lt;LocalID&gt;janedoe&lt;/LocalID&gt;
               &lt;/Service&gt;
           &lt;/XRD&gt;
       &lt;/XRDS&gt;
