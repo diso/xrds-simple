@@ -22,7 +22,7 @@
       </address>
     </author>
 
-    <date day="21" month="June" year="2008"/>
+    <date day="24" month="June" year="2008"/>
 
     <abstract>
       <t>
@@ -63,7 +63,7 @@
           <t hangText="Endpoint:">
             An absolute HTTP URI at which a Resource is available on the network.
           </t>
-          <t hangText="Resource Description Document">
+          <t hangText="Metadata Document">
             An XML-formatted document providing a machine-readable list
             of Resource descriptions and their Endpoints.
           </t>
@@ -85,18 +85,43 @@
         machine-readable metadata for HTTP-based Resources. It defines a method
         in which an HTTP URI can be queried for its attributes and related Resources.
         The metadata allows Consumers to enhance their interaction with the Resource
-        by understanding its interface, access methods, and relationship to other Resources.
+        by understanding its interfaces, access methods, and relationship to other Resources.
       </t>
       <t>
-        XRDS-Simple does not attempt to replace <xref target="Microformats" />, but addresses the
-        use cases in which the Resource is not HTML, or when the metadata is not
-        appropriete for end-user display. While the HTTP headers provide general container for
-        metadata about a Resource, they are not appropriate for large payloads.
+        XRDS-Simple does not attempt to replace HTTP headers or <xref target="Microformats" />.
+        It addresses the use cases in which the Resource is not an HTML document, the metadata is not
+        appropriete for end-user display, or the size of the metadata is not appropriate for
+        inclusion in the HTTP header.
       </t>
+
+      <section title="Relationship to Yadis and XRI">
+        <t>
+          The XRDS discovery document format originated at the OASIS XRI (Extensible Resource Identifier)
+          Technical Committee working in conjunction with the early OpenID community. The acronym XRDS -
+          Extensible Resource Descriptor Sequence - was coined out of discussions between XRI TC members
+          and OpenID developers at first Internet Identity Workshop held in Berkeley, CA in October 2005.
+        </t>
+        <t>
+          <xref target="OpenID Authentication 1.1" /> needed an HTTP(S)-based service discovery mechanism for URLs,
+          and the XRI TC had already defined an HTTP(S)-based resolution mechanism and a general-purpose service
+          discovery format for XRIs (a new type of abstract structured identifier). With a few changes,
+          a subset of the XRDS functionality defined by the
+          XRI Resolution specification would work with both URLs and XRIs. This subset was formalized as
+          the <xref target="Yadis" /> specification published by Yadis.org in March 2006, and Yadis subsequently became
+          the service discovery format for OpenID 1.1.
+        </t>
+        <t>
+          A single discovery service for both URLs and XRIs proved to be so popular that in November 2007
+          the <xref target="XRI Resolution 2.0" /> specification formally added the Yadis method for URL-based XRDS discovery
+          (Section 6). The <xref target="OpenID Authentication 2.0" /> specification released in December 2007 referenced this
+          updated specification. Since other applications and protocols needed only a subset of XRDS
+          functionality, work begin on formally defining this subset as XRDS-Simple.
+        </t>
+      </section>
 
       <section title="Relationship to XRDS">
         <t>
-          XRDS-Simple defines a subset of the XRDS format defined in <xref target="XRI Resolution 2.0" />,
+          XRDS-Simple defines a subset of the XRDS format detailed in <xref target="XRI Resolution 2.0" />,
           with a small set of extensions. In this specification, XRDS refers to the full format defined
           in <xref target="XRI Resolution 2.0" />, while XRDS-Simple refers to the subset of XRDS and
           the extensions defined in <xref target="xrds_simple_format" />.
@@ -105,14 +130,14 @@
           The goal of XRDS-Simple is to provide a lightweight version of XRDS that simplifies the
           implementation of parsers while maintaining full compatibility with XRDS and any XRDS-compliant
           parsers and resolvers. It also serves as an introduction to XRDS, giving implementers an upgrade
-          path to other XRDS features when appropriate.
+          path to the excluded XRDS features when appropriate.
         </t>
         <t>
-          By defining XRDS-Simple, implementers can both declare the scope of their application and
-          capabilities, as well as perform tests to assert that their application is capable of
-          processing input documents exactly as they were intended. This is of particular importance
+          By defining XRDS-Simple, Service Providers can declare the scope of their application and parser
+          developers can define thier library's capabilities. Parsers can perform tests to assert that they
+          are capable of processing input documents exactly as they were intended. This is of particular importance
           when processing documents with security or identity information, where misinterpretation
-          of the document can lead to a breach of security.
+          of the document and author's intent can lead to a breach of security.
         </t>
       </section>
       
@@ -120,147 +145,100 @@
 
     <section title="Workflow Overview">
       <t>
-        XRDS-Simple provides a bi-directional method for mapping between a Resource and the
-        Resource Description Document describing it. This allows finding Resource information
-        from either starting point, a Resource or a Resource Description Document.
+        The HTTP protocol provides a mechanism for requesting a specific represantation of a Resource using the
+        <spanx style="verb">Accept</spanx> header as defined in <xref target="RFC2616" /> section 14.1.
+        The Metadata Document is considered to be the <spanx style="verb">application/xrds+xml</spanx>
+        content type representation of the Resource.
       </t>
       <t>
-        In one direction, the Resource Endpoint is used to retrieve the Resource Description Document -
-        a machine-readable document containing information about the Resource,
-        as well as links to other associated Resources. In the opposite direction, a Resource
-        Description Document provides a list of Resource descriptions which are matched against
-        the desired selection criteria leading to a Resource Endpoint.
-      </t>
-      <t>
-        This can also be viewed as a circular workflow in which a Resource Endpoint leads to
-        the Resource Description Document which in turns leads back to the Resource Endpoint
-        via the Resource description, as well as points to other Resource Endpoints. The entry
-        point in which a Consumer enters the workflow depends on what is available to it.
-      </t>
-      <t>
-        The discovery workflow centers on the retrieval and parsing of the Resource Description
-        Document and includes two steps, each representing one of the entry point to the workflow:
+        The discovery workflow centers on the retrieval and parsing of the Metadata Document
+        and includes the following steps:
 
         <list style="symbols">
-          <t>Retrieve the Resource Description Document.</t>
-          <t>Parse the Resource Description Document and select the desired Endpoints.</t>
+          <t>Identify if the Resource supports discovery.</t>
+          <t>Retrieve the Metadata Document.</t>
+          <t>Parse the Metadata Document.</t>
+          <t>Select the desired Resource descriptions.</t>
         </list>
+      </t>
+    </section>
+
+    <section title="Discovery Identification">
+      <t>
+        If the Service Provider supports HTTP content negotiation, its responses SHOULD include a
+        <spanx style="verb">Vary</spanx> header to allow caches to properly interpret future requests. This
+        header SHOULD be present even in the case where an HTML page is returned (instead of an XRDS document).
       </t>
     </section>
 
     <section title="Document Retrieval">
       <t>
-        The Consumer obtains the Resource Description Document by following the workflow
-        defined in this section, starting with the Resource Endpoint. XRDS-Simple only defines
+        The Consumer obtains the Metadata Document by requesting the <spanx style="verb">application/xrds+xml</spanx>
+        content type representation of the Resource. XRDS-Simple only defines
         a retrieval method for HTTP(S) Endpoints. While XRDS-Simple supports descriptions of
-        non-HTTP(S) Endpoints, the method in which their associated Resource Description Document
+        non-HTTP(S) Endpoints, the method in which their associated Metadata Document
         is retrieved is beyond the scope of this specification.
       </t>
       <t>
         Document retrieval is performed in two steps. First the document's location is obtained from
-        the Endpoint, then the location obtained is used to request the Resource Description Document.
+        the Endpoint, then the location obtained is used to request the Metadata Document.
       </t>
 
       <section title="Obtaining Location">
         <t>
-          The document's location can be obtained using two protocols, originally specified in
-          <xref target="Yadis" /> and later adapted in <xref target="XRI Resolution 2.0" />, one uses HTTP HEAD
-          while the other uses HTTP GET.
-        </t>
-        <t>
-          In both protocols, if the Endpoint contains a fragment, it MUST be removed prior to
+          If the Endpoint contains a fragment, it MUST be removed prior to
           querying for the document's location. This is important as the document's location
           HTTP(S) URI MAY contain a fragment which carried a special meaning, and MUST NOT be confused with
           the Endpoint fragment (which is discarded for the purpose of performing discovery).
         </t>
         <t>
-          Service Providers MUST support the GET protocol and MAY support the HEAD protocol.
-          Consumers MAY attempt the HEAD protocol but MUST attempt the GET protocol
-          if the HEAD protocol fails. There is no difference between the retrieval workflow of XRDS documents
-          and that of XRDS-Simple documents.
+          Consumer MUST issue an HTTP(S) <spanx style="verb">GET</spanx> request to
+          the Endpoint and include an <spanx style="verb">Accept</spanx> header
+          specifying content type <spanx style="verb">application/xrds+xml</spanx>. The Service Provider response
+          MUST be one of four options:
+
+          <list style="numbers">
+            <t>
+              An HTTP redirect response with a <spanx style="verb">Location</spanx> header which the Consumer
+              MUST follow by reapting the GET request with the provided URI.
+            </t>
+            <t>
+              A <spanx style="verb">Content-Type</spanx> header with value <spanx style="verb">application/xrds+xml</spanx>.
+              In this case the response body is the Metadata Document and the workflow ends successfully skipping the step
+              described in <xref target="go_fetch" />.
+            </t>
+            <t>
+              An <spanx style="verb">X-XRDS-Location</spanx> header where the value of the header MUST
+              be an absolute HTTP(S) URI which gives the document's location.
+            </t>
+            <t>
+              A valid HTML document in the response body, with a &lt;head&gt; element that includes a &lt;meta&gt;
+              element with an <spanx style="verb">http-equiv</spanx> attribute equals to <spanx style="verb">X-XRDS-Location</spanx>.
+              The value of the &lt;meta&gt; element <spanx style="verb">content</spanx> attribute MUST be an absolute
+              HTTP(S) URI which gives the document's location.
+            </t>
+          </list>
         </t>
         <t>
-          In all cases the HTTP(S) status messages and error codes defined in <xref target="RFC2616" /> SHALL apply.
-          If the Service Provider supports HTTP content negotiation, its responses SHOULD include a
-          <spanx style="verb">Vary</spanx> header to allow caches to properly interpret future requests. This
-          header SHOULD be present even in the case where an HTML page is returned (instead of an XRDS document).
+          The Consumer MUST check the Service Provider's response for one of the four options in the order they are listed above, and
+          MUST stop as soon as a match is found. If no match is found, the protocol fails and the discovery workflow ends unsuccessfully.
         </t>
-
-        <section title="HEAD Protocol">
-          <t>
-            Using the HEAD protocol, the Consumer MUST issue an HTTP(S) <spanx style="verb">HEAD</spanx> request to
-            the Endpoint and include an <spanx style="verb">Accept</spanx> header
-            specifying content type <spanx style="verb">application/xrds+xml</spanx>. The response from the Service
-            Provider MUST include only headers, which MUST contain one of the following:
-            
-            <list style="numbers">
-              <t>
-                An HTTP redirect response with a <spanx style="verb">Location</spanx> header which the Consumer
-                MUST follow by reapting the HEAD protocol with the provided URI.
-              </t>
-              <t>
-                An <spanx style="verb">X-XRDS-Location</spanx> header where the value of the header MUST
-                be an HTTP(S) URI which gives the document's location.
-              </t>
-              <t>
-                A <spanx style="verb">Content-Type</spanx> header specifying the content type
-                <spanx style="verb">application/xrds+xml</spanx>. In this case the document's location
-                is identical to the Endpoint, excluding any fragment.
-              </t>
-            </list>
-          </t>
-          <t>
-            The Consumer MUST check the Service Provider's response for one of the three options in the order they are listed above, and
-            MUST stop as soon as a match is found. If no match is found, the protocol fails and the Consumer MUST attempt
-            the <xref target="get_yadis">GET protocol</xref>.
-          </t>
-        </section>
-
-        <section title="GET Protocol" anchor="get_yadis">
-          <t>
-            Using the GET protocol, the Consumer MUST issue an HTTP(S) <spanx style="verb">GET</spanx> request to
-            the Endpoint and include an <spanx style="verb">Accept</spanx> header
-            specifying content type <spanx style="verb">application/xrds+xml</spanx>. The Service Provider response
-            MUST be one of four options:
-
-            <list style="numbers">
-              <t>
-                An HTTP redirect response with a <spanx style="verb">Location</spanx> header which the Consumer
-                MUST follow by reapting the GET protocol with the provided URI.
-              </t>
-              <t>
-                A valid XRDS document in the response body. The Response SHOULD include the <spanx style="verb">Content-Type</spanx>
-                header with value <spanx style="verb">application/xrds+xml</spanx>. In this case, the response body contains
-                the Resource Description Document and the workflow ends successfully skipping the step described in <xref target="go_fetch" />.
-              </t>
-              <t>
-                An <spanx style="verb">X-XRDS-Location</spanx> header where the value of the header MUST
-                be an HTTP(S) URI which gives the document's location.
-              </t>
-              <t>
-                A valid HTML document in the response body, with a &lt;head&gt; element that includes a &lt;meta&gt;
-                element with an <spanx style="verb">http-equiv</spanx> attribute equals to <spanx style="verb">X-XRDS-Location</spanx>.
-                The value of the &lt;meta&gt; element <spanx style="verb">content</spanx> attribute MUST be an HTTP(S) URI which gives
-                the document's location.
-              </t>
-            </list>
-          </t>
-          <t>
-            The Consumer MUST check the Service Provider's response for one of the four options in the order they are listed above, and
-            MUST stop as soon as a match is found. If no match is found, the protocol fails and the discovery workflow ends unsuccessfully.
-          </t>
-        </section>
-        
+        <t>
+          The Consumer MAY issue an HTTP(S) <spanx style="verb">HEAD</spanx> request to
+          the Endpoint and include an <spanx style="verb">Accept</spanx> header
+          specifying content type <spanx style="verb">application/xrds+xml</spanx>, prior to
+          issuing the HTTP(S) <spanx style="verb">GET</spanx> request. This 
+        </t>
       </section>
 
       <section title="Requesting Document" anchor="go_fetch">
         <t>
           Once the document's location has been obtained, the Consumer MUST check if it is identical to the
-          Endpoint to avoid a loop (ignoring any differences in the URI fragments), in which case
-          the discovery workflow ends unsuccessfully. Otherwise, the Consumer MUST request the XRDS document from
-          the location URI using an HTTP(S) <spanx style="verb">GET</spanx> request with an
+          Endpoint (ignoring any differences in the URI fragments) to avoid a loop, in which case
+          the discovery workflow ends unsuccessfully. The Consumer MUST request the XRDS document from
+          the location URI using an HTTP(S) <spanx style="verb">GET</spanx> request and SHOULD include an
           <spanx style="verb">Accept</spanx> header specifying content type <spanx style="verb">application/xrds+xml</spanx>.
-          Consumers MUST follow any HTTP redirect response received while requesting the Resource Description Document.
+          Consumers MUST follow any HTTP redirect response received while requesting the Metadata Document.
         </t>
         <t>
           The Service Provider MUST reply with a Valid XRDS document in the response body. The Response SHOULD include
@@ -278,13 +256,13 @@
 
     <section title="Document Structure" anchor="xrds_simple_format">
       <t>
-        The Resource Description Document is an XML-formatted document providing machine-readable descriptions of one or more Resources.
+        The Metadata Document is an XML-formatted document providing machine-readable descriptions of one or more Resources.
         Grouping descriptions together is usually done to indicate some common purpose, for example, a collection of services offered by
         a company or an individual's online assets and identifiers. XRDS-Simple defines only the most fundamental properties needed for
         requesting specific representations of the Resource (e.g., specific media types), or for interacting directly with the Resource.
       </t>
       <t>
-        In its simplest form, the Resource Description Document is a list of
+        In its simplest form, the Metadata Document is a list of
         Resources and their Endpoints grouped together. The document structure consists
         of three primary elements (listed in reverse hierarchical order):
 
@@ -310,7 +288,7 @@
 
       <section title="Declarations and Requirements" anchor="requirements">
         <t>
-          The Resource Description Document MUST be a valid XRDS document, contain a single <spanx style="verb">XRDS</spanx>
+          The Metadata Document MUST be a valid XRDS document, contain a single <spanx style="verb">XRDS</spanx>
           root element, and define the <spanx style="verb">xri://$xrds</spanx> namespace. While a valid XRDS-Simple document
           MAY include any number of <spanx style="verb">XRD</spanx> elements as well as elements from other namespaces, only
           XRDS-Simple compliant <spanx style="verb">XRD</spanx> elements are used in the discovery process.
@@ -386,7 +364,7 @@
               0 or 1 per <spanx style="verb">XRD</spanx> element with type xs:dateTime.
               The date and time without fractional seconds in UTC "Z" time zone, after which
               the <spanx style="verb">XRD</spanx> element MUST NOT be used. If the
-              Resource Description Document was obtained via HTTP, and the HTTP headers specified
+              Metadata Document was obtained via HTTP, and the HTTP headers specified
               an expiry time per section 13.2 of <xref target="RFC2616" />, the <spanx style="verb">XRD</spanx> element MUST NOT
               be used after the earlier of the two times passes.
             </t>
@@ -612,7 +590,7 @@
     
     <section title="Resource Descriptions Selection">
       <t>
-        The Resource Description Document provides lists of Resource descriptions grouped together. Once
+        The Metadata Document provides lists of Resource descriptions grouped together. Once
         the document has been obtained, the Consumer typically performs Resource descriptions selection,
         to extract the descriptions of the Resources relevant to it. The selection process centers around
         iterating through the list of Resource descriptions, filtering them based on their type and media-type,
@@ -741,31 +719,6 @@
       &lt;/XRDS&gt;
           </artwork>
         </figure>
-      </t>
-    </appendix>
-
-    <appendix title="History of XRDS">
-      <t>
-        The XRDS discovery document format originated at the OASIS XRI (Extensible Resource Identifier)
-        Technical Committee working in conjunction with the early OpenID community. The acronym XRDS -
-        Extensible Resource Descriptor Sequence - was coined out of discussions between XRI TC members
-        and OpenID developers at first Internet Identity Workshop held in Berkeley, CA in October 2005.
-      </t>
-      <t>
-        <xref target="OpenID Authentication 1.1" /> needed an HTTP(S)-based service discovery mechanism for URLs,
-        and the XRI TC had already defined an HTTP(S)-based resolution mechanism and a general-purpose service
-        discovery format for XRIs (a new type of abstract
-        structured identifier). With a few changes, a subset of the XRDS functionality defined by the
-        XRI Resolution specification would work with both URLs and XRIs. This subset was formalized as
-        the <xref target="Yadis" /> specification published by Yadis.org in March 2006, and Yadis subsequently became
-        the service discovery format for OpenID 1.1.
-      </t>
-      <t>
-        A single discovery service for both URLs and XRIs proved to be so popular that in November 2007
-        the <xref target="XRI Resolution 2.0" /> specification formally added the Yadis method for URL-based XRDS discovery
-        (Section 6). The <xref target="OpenID Authentication 2.0" /> specification released in December 2007 referenced this
-        updated specification. Since other applications and protocols needed only a subset of XRDS
-        functionality, work begin on formally defining this subset as XRDS-Simple.
       </t>
     </appendix>
 
