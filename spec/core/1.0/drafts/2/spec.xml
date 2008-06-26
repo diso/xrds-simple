@@ -224,10 +224,14 @@
           MUST stop as soon as a match is found. If no match is found, the protocol fails and the discovery workflow ends unsuccessfully.
         </t>
         <t>
-          The Consumer MAY issue an HTTP(S) <spanx style="verb">HEAD</spanx> request to
-          the Endpoint and include an <spanx style="verb">Accept</spanx> header
-          specifying content type <spanx style="verb">application/xrds+xml</spanx>, prior to
-          issuing the HTTP(S) <spanx style="verb">GET</spanx> request. This 
+          The Consumer MAY attempt to issue an HTTP(S) <spanx style="verb">HEAD</spanx> request to
+          the Endpoint specifying the content type prior to issuing the HTTP(S) <spanx style="verb">GET</spanx> request.
+          If the Service Provider's response is a redirect, or includes the <spanx style="verb">X-XRDS-Location</spanx>
+          header without a <spanx style="verb">Content-Type</spanx> header with value <spanx style="verb">application/xrds+xml</spanx>,
+          the Consumer can skip the HTTP(S) <spanx style="verb">GET</spanx> request, otherwise will have to preform both requests.
+          Using the <spanx style="verb">HEAD</spanx> request is NOT RECOMMENDED unless the Consumer knows the Service Provider is
+          likely to reply with a redirect response or an <spanx style="verb">X-XRDS-Location</spanx>
+          header without a <spanx style="verb">Content-Type</spanx> header with value <spanx style="verb">application/xrds+xml</spanx>.
         </t>
       </section>
 
