@@ -128,9 +128,9 @@
           <t hangText="Endpoint:">
             An absolute HTTP URI at which a Resource is available on the network.
           </t>
-          <t hangText="Metadata Document">
+          <t hangText="Discovery Document">
             An XML-formatted document providing a machine-readable list
-            of Resource descriptions and their Endpoints.
+            of Resources metadata and their Endpoints.
           </t>
           <t hangText="Service Provider:">
             A web application supporting XRDS-Simple discovery and providing machine-readable
@@ -148,11 +148,11 @@
       <t>
         The HTTP protocol provides a mechanism for requesting an alternative representation of a Resource using the
         <spanx style="verb">Accept</spanx> header as defined in <xref target="RFC2616" /> section 14.1.
-        The Metadata Document is considered to be the <spanx style="verb">application/xrds+xml</spanx>
+        The Discovery Document is considered to be the <spanx style="verb">application/xrds+xml</spanx>
         content type representation of the Resource.
       </t>
       <t>
-        The discovery workflow centers on the retrieval and parsing of the Metadata Document
+        The discovery workflow centers on the retrieval and parsing of the Discovery Document
         and includes the following steps:
 
         <list style="symbols">
@@ -161,11 +161,11 @@
             described in <xref target="discovery_identification" />.
           </t>
           <t>
-            The Metadata Document describing the Resource is obtained by making an HTTP request -
+            The Discovery Document describing the Resource is obtained by making an HTTP request -
             described in <xref target="document_retrieval" />.
           </t>
           <t>
-            The Metadata Document is parsed and broken into groups of services and their attributes -
+            The Discovery Document is parsed and broken into groups of services and their attributes -
             described in <xref target="xrds_simple_format" />.
           </t>
           <t>
@@ -193,10 +193,10 @@
       </t>
       <t>
         If supported, the value of the <spanx style="verb">X-XRDS-Location</spanx> header MUST include an
-        absolute HTTP(S) URI which gives the location of the Resource's Metadata Document. The URI MUST reference
-        the same Metadata Document obtained by following the workflow defined in <xref target="obtaining_location" />.
+        absolute HTTP(S) URI which gives the location of the Resource's Discovery Document. The URI MUST reference
+        the same Discovery Document obtained by following the workflow defined in <xref target="obtaining_location" />.
         If the <spanx style="verb">X-XRDS-Location</spanx> header is present, the Consumer MAY skip the workflow defined in
-        <xref target="obtaining_location" /> and proceed to <xref target="go_fetch">obtain the Metadata Document</xref>.
+        <xref target="obtaining_location" /> and proceed to <xref target="go_fetch">obtain the Discovery Document</xref>.
       </t>
       <t>
         If no <spanx style="verb">X-XRDS-Location</spanx> header is found, the Consumer MUST
@@ -207,15 +207,15 @@
 
     <section title="Document Retrieval" anchor="document_retrieval">
       <t>
-        The Consumer obtains the Metadata Document by requesting the <spanx style="verb">application/xrds+xml</spanx>
+        The Consumer obtains the Discovery Document by requesting the <spanx style="verb">application/xrds+xml</spanx>
         content type representation of the Resource. XRDS-Simple only defines
         a retrieval method for HTTP(S) Endpoints. While XRDS-Simple supports descriptions of
-        non-HTTP(S) Endpoints, the method in which their associated Metadata Document
+        non-HTTP(S) Endpoints, the method in which their associated Discovery Document
         is retrieved is beyond the scope of this specification.
       </t>
       <t>
         Document retrieval is performed in two steps. First the document's location is obtained from
-        the Endpoint, then the location obtained is used to request the Metadata Document.
+        the Endpoint, then the location obtained is used to request the Discovery Document.
       </t>
 
       <section title="Obtaining Location" anchor="obtaining_location">
@@ -234,7 +234,7 @@
             </t>
             <t>
               A <spanx style="verb">Content-Type</spanx> header with value <spanx style="verb">application/xrds+xml</spanx>.
-              In this case the response body is the Metadata Document and the workflow ends successfully skipping the step
+              In this case the response body is the Discovery Document and the workflow ends successfully skipping the step
               described in <xref target="go_fetch" />.
             </t>
             <t>
@@ -272,10 +272,10 @@
           ends unsuccessfully as that request has already failed to produce a valid XRDS-Simple document.
         </t>
         <t>
-          The Consumer MUST request the Metadata Document from the location URI using an HTTP(S)
+          The Consumer MUST request the Discovery Document from the location URI using an HTTP(S)
           <spanx style="verb">GET</spanx> request and SHOULD include an
           <spanx style="verb">Accept</spanx> header specifying content type <spanx style="verb">application/xrds+xml</spanx>.
-          The Consumer MUST follow any HTTP redirect responses received while requesting the Metadata Document.
+          The Consumer MUST follow any HTTP redirect responses received while requesting the Discovery Document.
         </t>
         <t>
           The Service Provider MUST reply with a valid XRDS-Simple document in the response body. The Response SHOULD include
@@ -294,13 +294,13 @@
 
     <section title="Document Structure" anchor="xrds_simple_format">
       <t>
-        The Metadata Document is an XML-formatted document providing machine-readable descriptions of one or more Resources.
+        The Discovery Document is an XML-formatted document providing machine-readable descriptions of one or more Resources.
         Grouping descriptions together is usually done to indicate some common purpose, for example, a collection of services offered by
         a company or an individual's online assets and identifiers. XRDS-Simple defines only the most fundamental properties needed for
         requesting specific representations of the Resource (e.g., specific media types), or for interacting directly with the Resource.
       </t>
       <t>
-        In its simplest form, the Metadata Document is a list of
+        In its simplest form, the Discovery Document is a list of
         Resources and their Endpoints grouped together. The document structure consists
         of three primary elements (listed in reverse hierarchical order):
 
@@ -326,7 +326,7 @@
 
       <section title="Declarations and Requirements" anchor="requirements">
         <t>
-          The Metadata Document MUST be a valid XRDS document, contain a single <spanx style="verb">XRDS</spanx>
+          The Discovery Document MUST be a valid XRDS document, contain a single <spanx style="verb">XRDS</spanx>
           root element, and define the <spanx style="verb">xri://$xrds</spanx> namespace. While a valid XRDS-Simple document
           MAY include any number of <spanx style="verb">XRD</spanx> elements as well as elements from other namespaces, only
           XRDS-Simple compliant <spanx style="verb">XRD</spanx> elements are used in the discovery process.
@@ -402,7 +402,7 @@
               0 or 1 per <spanx style="verb">XRD</spanx> element with type xs:dateTime.
               The date and time without fractional seconds in UTC "Z" time zone, after which
               the <spanx style="verb">XRD</spanx> element MUST NOT be used. If the
-              Metadata Document was obtained via HTTP, and the HTTP headers specified
+              Discovery Document was obtained via HTTP, and the HTTP headers specified
               an expiry time per section 13.2 of <xref target="RFC2616" />, the <spanx style="verb">XRD</spanx> element MUST NOT
               be used after the earlier of the two times passes.
             </t>
@@ -628,7 +628,7 @@
     
     <section title="Resource Descriptions Selection" anchor="desc_selection">
       <t>
-        The Metadata Document provides lists of Resource descriptions grouped together. Once
+        The Discovery Document provides lists of Resource descriptions grouped together. Once
         the document has been obtained, the Consumer typically performs Resource descriptions selection,
         to extract the descriptions of the Resources relevant to it. The selection process centers around
         iterating through the list of Resource descriptions, filtering them based on their type and media-type,
