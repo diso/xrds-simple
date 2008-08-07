@@ -14,7 +14,7 @@
 
   <front>
     
-    <title abbrev="XRDS-Simple 1.0 D2">XRDS-Simple 1.0 Draft 2</title>
+    <title abbrev="XRDS-Simple 1.0 D2">XRDS-Simple 1.0 Draft 2x</title>
 
     <author initials="E" surname="Hammer-Lahav" fullname="Eran Hammer-Lahav">
       <organization>Yahoo!</organization>
@@ -23,7 +23,7 @@
       </address>
     </author>
 
-    <date day="24" month="June" year="2008"/>
+    <date day="7" month="August" year="2008"/>
 
     <abstract>
       <t>
@@ -60,7 +60,7 @@
       <t>
         XRDS-Simple provides a discovery protocol and document format which add
         machine-readable metadata for HTTP-based Resources. It defines a method
-        in which an HTTP URI can be queried for its attributes and related Resources.
+        in which an HTTP URI can be queried for its properties and related Resources.
         The metadata allows Consumers to enhance their interaction with the Resource
         by understanding its interfaces, access methods, and relationship to other Resources.
       </t>
@@ -95,7 +95,7 @@
         </t>
       </section>
 
-      <section title="XRDS Schema">
+      <section title="Relationship to XRDS Schema">
         <t>
           XRDS-Simple defines a subset of the XRDS schema detailed in <xref target="XRI Resolution 2.0" />,
           with a small set of extensions. In this specification, XRDS refers to the full schema defined
@@ -118,27 +118,22 @@
       </section>
       
     </section>
-
+    
     <section title="Definitions">
       <t>
         <list style="hanging">
           <t hangText="Resource:">
             A network document or service addressable using an HTTP URI.
           </t>
-          <t hangText="Endpoint:">
-            An absolute HTTP URI at which a Resource is available on the network.
-          </t>
           <t hangText="Discovery Document">
-            An XML-formatted document providing a machine-readable list
-            of Resources metadata and their Endpoints.
+            An machine-readable XML-formatted document describing a group of Resources.
           </t>
           <t hangText="Service Provider:">
-            A web application supporting XRDS-Simple discovery and providing machine-readable
-            information about its Resources.
+            A web application supporting XRDS-Simple discovery and providing Discovery Documents for its Resources.
           </t>
           <t hangText="Consumer:">
             A website or application that uses XRDS-Simple to discovery information
-            about Resources offered by a Service Provider.
+            about the Resources offered by a Service Provider.
           </t>
         </list>
       </t>
@@ -165,12 +160,12 @@
             described in <xref target="document_retrieval" />.
           </t>
           <t>
-            The Discovery Document is parsed and broken into groups of services and their attributes -
+            The Discovery Document is parsed and broken into groups of services and their properties -
             described in <xref target="xrds_simple_format" />.
           </t>
           <t>
-            The desired Resource descriptions are selected providing the Consumer with the
-            information it understands and of value - described in <xref target="desc_selection"/>.
+            The desired Resource information is selected from the complete Discovery Document set,
+            providing the Consumer with the needed properties - described in <xref target="desc_selection"/>.
           </t>
         </list>
       </t>
@@ -179,7 +174,7 @@
     <section title="Discovery Identification" anchor="discovery_identification">
       <t>
         The Consumer MAY perform Discovery before or after a Resource is obtained. Performing discovery
-        ahead of requesting the Resource allows the Consumer to learn more about the attributes of the
+        ahead of requesting the Resource allows the Consumer to learn more about the properties of the
         Resource. For example, a Consumer can learn about the API supported by the Resource and if it is understood,
         use it to interact with the Resource. In some cases the Consumer will want to perform discovery
         after attempting to obtain the Resource. For example, when an attempt to access the Resource fails, the
@@ -209,21 +204,21 @@
       <t>
         The Consumer obtains the Discovery Document by requesting the <spanx style="verb">application/xrds+xml</spanx>
         content type representation of the Resource. XRDS-Simple only defines
-        a retrieval method for HTTP(S) Endpoints. While XRDS-Simple supports descriptions of
-        non-HTTP(S) Endpoints, the method in which their associated Discovery Document
+        a retrieval method for HTTP(S) URIs. While XRDS-Simple supports descriptions of
+        non-HTTP(S) URIs, the method in which their associated Discovery Document
         is retrieved is beyond the scope of this specification.
       </t>
       <t>
         Document retrieval is performed in two steps. First the document's location is obtained from
-        the Endpoint, then the location obtained is used to request the Discovery Document.
+        the Resource URI, then the location obtained is used to request the Discovery Document.
       </t>
 
       <section title="Obtaining Location" anchor="obtaining_location">
         <t>
           The Consumer MUST issue an HTTP(S) <spanx style="verb">GET</spanx> request to
-          the Endpoint and include an <spanx style="verb">Accept</spanx> header
+          the Resource URI and include an <spanx style="verb">Accept</spanx> header
           specifying content type <spanx style="verb">application/xrds+xml</spanx>.
-          If the Endpoint contains a fragment as defined by <xref target="RFC3986" />
+          If the URI contains a fragment as defined by <xref target="RFC3986" />
           section 3, it MUST be removed prior to making the request. The Service Provider response
           MUST be one of four options:
 
@@ -255,7 +250,7 @@
         </t>
         <t>
           NOTE: The Consumer MAY attempt to issue an HTTP(S) <spanx style="verb">HEAD</spanx> request to
-          the Endpoint specifying the content type prior to issuing the HTTP(S) <spanx style="verb">GET</spanx> request.
+          the Resource URI specifying the content type prior to issuing the HTTP(S) <spanx style="verb">GET</spanx> request.
           If the Service Provider's response is a redirect, or includes the <spanx style="verb">X-XRDS-Location</spanx>
           header without a <spanx style="verb">Content-Type</spanx> header with value <spanx style="verb">application/xrds+xml</spanx>,
           the Consumer can skip the HTTP(S) <spanx style="verb">GET</spanx> request, otherwise will have to repeating both requests.
@@ -267,7 +262,7 @@
 
       <section title="Requesting Document" anchor="go_fetch">
         <t>
-          The Consumer SHOULD check if the document's location is identical to the Endpoint, excluding any
+          The Consumer SHOULD check if the document's location is identical to the Resource URI, excluding any
           differences in the URI fragments. If the URIs are considered identical, the discovery workflow
           ends unsuccessfully as that request has already failed to produce a valid XRDS-Simple document.
         </t>
@@ -283,7 +278,7 @@
           If the response is not a valid XRDS-Simple document, the discovery workflow ends unsuccessfully.
         </t>
         <t>
-          NOTE: If the document's location URI contains a fragment (not to be confused with an Endpoint fragment),
+          NOTE: If the document's location URI contains a fragment (not to be confused with an Resource URI fragment),
           it is used as an XRD identifier pointing to a specific XML element
           with an <spanx style="verb">xml:id</spanx> attribute of an identical value. The XRD identifier is described in
           <xref target="xrd_identification" />.
@@ -294,19 +289,12 @@
 
     <section title="Document Structure" anchor="xrds_simple_format">
       <t>
-        The Discovery Document is an XML-formatted document providing machine-readable descriptions of one or more Resources.
-        Grouping descriptions together is usually done to indicate some common purpose, for example, a collection of services offered by
-        a company or an individual's online assets and identifiers. XRDS-Simple defines only the most fundamental properties needed for
-        requesting specific representations of the Resource (e.g., specific media types), or for interacting directly with the Resource.
-      </t>
-      <t>
-        In its simplest form, the Discovery Document is a list of
-        Resources and their Endpoints grouped together. The document structure consists
+        The Discovery Document groups together a list of Resources and their URIs. The document structure consists
         of three primary elements (listed in reverse hierarchical order):
 
         <list style="hanging">
           <t hangText="&lt;Service&gt;">
-            Describes a Resource by assigning it a type and media-type, declaring its Endpoints, and
+            Describes a Resource by assigning it a type and media-type, declaring its URIs, and
             provides any additional information relevant to the utilization of the Resource. For example,
             it describes a photo album, identity provider, or social network account.
           </t>
@@ -417,7 +405,7 @@
       <section title="Service Element" anchor="service_element">
         <t>
           The <spanx style="verb">Service</spanx> element describes a Resource and provides elements to declare
-          its Endpoints and other attributes. The <spanx style="verb">Service</spanx> element supports the
+          its URIs and other properties. The <spanx style="verb">Service</spanx> element supports the
           following attributes:
 
           <list style="hanging">
@@ -452,17 +440,17 @@
               but MAY include any number of both.
             </t>
             <t hangText="&lt;URI&gt;">
-              0 or more per <spanx style="verb">Service</spanx> element with type xs:anyURI. Provides the Endpoint where
+              0 or more per <spanx style="verb">Service</spanx> element with type xs:anyURI. Provides the URI where
               the Resource can be found and used or retrieved. If no <spanx style="verb">URI</spanx> element is defined,
               it is assumed the URI can be obtained by other means not specified in this specification. Supports
               the OPTIONAL <spanx style="verb">priority</spanx> attribute as defined by <xref target="priority_attribute" />.
             </t>
             <t hangText="&lt;LocalID&gt;">
               0 or more per <spanx style="verb">Service</spanx> element with type xs:anyURI. Provides a standard way to indicate
-              the identifier associated with the Resource at the Endpoint where it is located. The value and meaning of the element
+              the identifier associated with the Resource at the URI where it is located. The value and meaning of the element
               is specific to the Resource and its type, and is beyond the scope of this specification. Supports
               the OPTIONAL <spanx style="verb">priority</spanx> attribute as defined by <xref target="priority_attribute" />. For example,
-              this element is useful when the local identifier such as username, is not part of the Endpoint, but is provided as a parameter.
+              this element is useful when the local identifier such as username, is not part of the URI, but is provided as a parameter.
             </t>
             <t hangText="&lt;simple:MustSupport&gt;">
               0 or more per <spanx style="verb">Service</spanx> element with type xs:anyURI as defined by <xref target="MustSupport_element" />.
@@ -516,7 +504,7 @@
           </figure>
         </t>
         <t>
-          If two or more instances of the same element type have identical priority attribute values (including the <spanx style="verb">null</spanx> value),
+          If two or more instances of the same element type have identical <spanx style="verb">priority</spanx> attribute values (including the <spanx style="verb">null</spanx> value),
           the Consumer SHOULD select one of the instances at random. The Consumer SHOULD NOT choose the first instance that appears in XML document order.
           This is needed to support the Service Provider's redundancy or load balancing intentions.
         </t>
@@ -562,8 +550,7 @@
             <spanx style="verb">Type</spanx> element, the <spanx style="verb">simple:MustSupport</spanx> element
             uses namespace URIs to describe the Resource. It instructs Consumer that the Resource requires some additional
             understanding beyond matching some of the types or media-types. Consumers SHOULD always check for
-            unknown <spanx style="verb">simple:MustSupport</spanx> element values before selecting or utilizing the
-            Resource description.
+            unknown <spanx style="verb">simple:MustSupport</spanx> element values before selecting or utilizing Resource properties.
           </t>
           <t>
             The element can be considered a sub-type, but carries the additional functionality of instructing
@@ -576,7 +563,7 @@
           <t>
             In some cases, an overlap exists between the <spanx style="verb">Type</spanx> and <spanx style="verb">simple:MustSupport</spanx>
             elements. In those cases, both elements SHOULD be included to maintain consistency with existing practices. For example,
-            OpenID uses <spanx style="verb">Type</spanx> elements to document both the type of the Endpoint, as well as the OpenID
+            OpenID uses <spanx style="verb">Type</spanx> elements to document both the type of the URI, as well as the OpenID
             extensions it supports. If one of these extensions is REQUIRED, its namespace identifier SHOULD appear in both a
             <spanx style="verb">Type</spanx> and <spanx style="verb">simple:MustSupport</spanx> elements, within the same
             <spanx style="verb">Service</spanx> element.
@@ -601,13 +588,12 @@
           XRDS but places strict limitations on the ability
           to extend the format. Any extension used MUST NOT define or cause any deviation
           from the meaning and workflow defined in this specification with regard to the
-          discovery process. Extensions MUST be restricted to add only Resource-specific
-          descriptions.
+          discovery process. Extensions MUST be restricted to add only Resource-specific properties.
         </t>
         <t>
           This is particularly true to XRDS elements and attributes
           not explicitly listed and allowed in this specification, as they might significantly
-          alter the way in which a document is parsed and Endpoints selected. For a document
+          alter the way in which a document is parsed and URIs selected. For a document
           to legally declare itself as XRDS-Simple, it must be fully compatible with any compliant
           XRDS-Simple parser, as well as any compliant XRDS parser.
         </t>
@@ -626,16 +612,16 @@
 
     </section>
     
-    <section title="Resource Descriptions Selection" anchor="desc_selection">
+    <section title="Information Selection" anchor="desc_selection">
       <t>
-        The Discovery Document provides lists of Resource descriptions grouped together. Once
-        the document has been obtained, the Consumer typically performs Resource descriptions selection,
-        to extract the descriptions of the Resources relevant to it. The selection process centers around
-        iterating through the list of Resource descriptions, filtering them based on their type and media-type,
-        and selecting them based on their relative priorities.
+        The Discovery Document provides lists of Resource properties grouped together. Once
+        the document has been obtained, the Consumer typically performs information selection,
+        to extract the properties of the Resources relevant to it. The selection process centers around
+        iterating through the list of Resource properties, filtering them based on their type and media-type,
+        and selecting them based on their relevance.
       </t>
       <t>
-        The Resource descriptions selection process includes two steps:
+        The information selection process includes two steps:
 
         <list style="numbers">
           <t>
@@ -683,9 +669,9 @@
         <t>
           Based on the Consumer's needs, the Consumer defines a selection criteria based on the presence (or lack of) certain
           Resource types and media-types. The selection criteria can be any combination of type and media-type values desired by
-          the Consumer, as well as looking for specific Endpoint URIs. For example, a Consumer can look for all Resource
-          descriptions with an image media-type, an Endpoint with OpenID authentication type, or the description of a specific
-          Resource given its Endpoint URI.
+          the Consumer, as well as looking for specific Resource URIs. For example, a Consumer can look for all Resources
+          with an image media-type, an URI with OpenID authentication type, or the properties of a specific
+          Resource given its URI.
         </t>
         <t>
           If the selection criteria place higher preference on the presence of certain types or media-types over others, it is handled
