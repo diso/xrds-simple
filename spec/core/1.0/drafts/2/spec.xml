@@ -27,10 +27,10 @@
 
     <abstract>
       <t>
-        XRDS-Simple provides a format and workflow for the discovery of resource metadata
+        XRDS-Simple provides a format and workflow for the discovery of a resource's metadata
         and other linked resources. It allows providers to document their resources
-        in a machine-readable way enabling automatic discovery by consumer applications.
-        Discovery enables applications to utilizing a wide range of web services
+        in a machine-readable way, enabling automatic discovery by consumer applications.
+        Discovery enables applications to utilizie a wide range of web services
         and resources across multiple providers without the need to know about them ahead
         of time.
       </t>
@@ -38,8 +38,8 @@
         The XRDS-Simple specification builds on top of existing practices first introduced
         by the XRI community and later adopted and further developed by Yadis, a discovery
         protocol widely used by the OpenID community. The goal of XRDS-Simple is to provide an
-        easy to implement solution that is focused on solving the most common discovery
-        use cases.
+        independent and easy to implement solution that is focused on solving the most common
+        discovery use cases.
       </t>
     </abstract>
 
