@@ -51,9 +51,10 @@ class XrdsSimpleParser {
     $info = self::parseResponse($response);
     if (!$info) return false; // no response or unable to parse
 
-    if (isset($info['headers']['X-XRDS-Location'])) {
-      $rddUrl = $info['headers']['X-XRDS-Location'];
-    } else if (isset($info['headers']['Content-Type']) && $info['headers']['Content-Type'] == 'application/xrds+xml') {
+    if (isset($info['headers']['X-XRDS-LOCATION'])) {
+      $rddUrl = $info['headers']['X-XRDS-LOCATION'];
+    } else if (isset($info['headers']['CONTENT-TYPE']) && 
+               preg_match('/^application\/xrds\+xml(?:;.*)?/', $info['headers']['CONTENT-TYPE'])) {
       $rddUrl = $url; // this is the RDD
     } else if (preg_match('/<meta +http-equiv="X-XRDS-Location" +content="([^"]*)"/i', $info['body'], $matches)) {
       $rddUrl = $matches[1]; // TODO: should use XML parser or more robust regex here
@@ -88,7 +89,8 @@ class XrdsSimpleParser {
     foreach ($rddXml->XRD as $xrdi) {
       if ($xrdi['version'] != "2.0") continue; // must have a version="2.0" attribute
       if (isset($xrdi->Expires) && strtotime($xrdi->Expires) < $now) continue; // must not be expired
-      if ($xrdi->Type != 'xri://$xrds*simple') continue; // must have XRDS-Simple Type
+      // js: stop looking for $xrds*simple since it's now deprecated
+      //if ($xrdi->Type != 'xri://$xrds*simple') continue; // must have XRDS-Simple Type
 
       if ($xrdId) {
         // implicit namespace for xml:id, see http://www.w3.org/TR/REC-xml-names/#ns-decl
@@ -209,7 +211,7 @@ class XrdsSimpleParser {
    * Parses Http response with headers into status code, response body, and array of headers.
    * From http://us3.php.net/curl_setopt
    * @param string $response The original response string
-   * @param bool $parseHeaders If true, parses the headers into a name=>value map.
+   * @param bool $parseHeaders If true, parses the headers into a name=>value map (header names are normalized to ALL CAPS).
    */
   private static function parseResponse($response, $parseHeaders = true) {
     if (!$response) return false;
@@ -229,6 +231,7 @@ class XrdsSimpleParser {
       $response_header_array = array();
       foreach($response_header_lines as $header_line) {
         list($header,$value) = explode(': ', $header_line, 2);
+        $header = strtoupper($header); // normalize to all caps since headers are case-insensitive
         if (isset($response_header_array[$header])) {
           $response_header_array[$header] .= "\n".$value;
         } else $response_header_array[$header] = $value;
